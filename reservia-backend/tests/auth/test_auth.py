@@ -2,26 +2,36 @@ from datetime import datetime, timedelta
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from app.core import config
-from app.core.database import SessionLocal, engine, get_db
+from app.core import config as app_config
+from app.core.database import get_db
 from app.main import app
 from app.models.auth.session import Session as SessionModel
 from app.models.auth.user import User
 from app.models.shared.audit_log import AuditLog
 from app.models.shared.base import Base
 
+TEST_SQLALCHEMY_DATABASE_URL = (
+    f"mysql+pymysql://{app_config.DB_USER}:{app_config.DB_PASSWORD}"
+    f"@{app_config.DB_HOST}:{app_config.DB_PORT}/{app_config.TEST_DB_NAME}"
+)
+test_engine = create_engine(TEST_SQLALCHEMY_DATABASE_URL)
+TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
+
 
 @pytest.fixture(scope="session", autouse=True)
 def _create_schema():
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=test_engine)
     yield
-    Base.metadata.drop_all(bind=engine)
+    Base.metadata.drop_all(bind=test_engine)
 
 
 @pytest.fixture()
 def db_session():
-    session = SessionLocal()
+    session = TestSessionLocal()
     yield session
     session.close()
 
@@ -38,7 +48,7 @@ def _clean_tables(db_session):
 @pytest.fixture()
 def client():
     def override_get_db():
-        session = SessionLocal()
+        session = TestSessionLocal()
         try:
             yield session
         finally:
@@ -90,14 +100,14 @@ def test_register_concurrent_duplicate_email_only_one_succeeds(client, db_sessio
         email="race@example.com", password="Secret123", full_name="Race Condition"
     )
 
-    session_a = SessionLocal()
-    session_b = SessionLocal()
+    session_a = TestSessionLocal()
+    session_b = TestSessionLocal()
 
     # Primera "solicitud": se registra y confirma normalmente
     auth_service.register_client(session_a, data)
 
     # Segunda "solicitud": simula que su chequeo de pre-existencia ya había
-    # pasado (ventana de carrera) antes de que la primera insercion fuera
+    # pasado (ventana de carrera) antes de que la primera inserción fuera
     # visible. Esto obliga a llegar al INSERT real y disparar el
     # IntegrityError que auth_service.register_client debe capturar.
     with patch.object(user_repository, "get_by_email", return_value=None):
