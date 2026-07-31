@@ -125,6 +125,13 @@ def create_provider(db: DBSession, admin_user: User, data: CreateProviderRequest
         db.rollback()
         raise EmailAlreadyRegisteredError("email ya registrado")
 
+    # Import diferido (dentro de la función, no a nivel de módulo) para
+    # mantener auth_service y provider_service desacoplados en tiempo de
+    # importación del módulo, según lo indicado por Chat A.
+    from app.services.providers.provider_service import ensure_provider_profile
+
+    ensure_provider_profile(db, user_id=user.id)
+
     audit_repository.log_action(
         db,
         actor_user_id=admin_user.id,
