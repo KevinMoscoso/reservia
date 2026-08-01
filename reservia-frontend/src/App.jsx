@@ -7,6 +7,8 @@ import RegisterPage from './pages/RegisterPage';
 import SetupAdminPage from './pages/SetupAdminPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import CreateProviderPage from './pages/CreateProviderPage';
+import SalasPage from './pages/SalasPage';
+import EquiposPage from './pages/EquiposPage';
 import ProviderDashboardPage from './pages/ProviderDashboardPage';
 import ClientDashboardPage from './pages/ClientDashboardPage';
 
@@ -46,6 +48,22 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <CreateProviderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/salas"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <SalasPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/equipos"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <EquiposPage />
               </ProtectedRoute>
             }
           />
