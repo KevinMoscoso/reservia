@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from datetime import date
+
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session as DBSession
 
 from app.core.database import get_db
@@ -11,7 +13,13 @@ from app.schemas.providers.provider import (
     ScheduleBlockCreateRequest,
     ScheduleBlockResponse,
 )
+from app.schemas.reservations.reserva import (
+    AvailabilityBlockResponse,
+    BookingCreateRequest,
+    CitaResponse,
+)
 from app.services.providers import provider_service
+from app.services.reservations import cita_service
 
 router = APIRouter(prefix="/api/providers", tags=["providers"])
 
@@ -86,6 +94,68 @@ def deactivate_my_schedule_block(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
     except provider_service.ScheduleBlockNotFoundError as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+
+
+@router.get("/citas/me", response_model=list[CitaResponse])
+def list_my_citas(
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    return cita_service.list_my_citas(db, current_user.id)
+
+
+@router.patch("/citas/{cita_id}/cancel", response_model=CitaResponse)
+def cancel_cita(
+    cita_id: int,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    try:
+        return cita_service.cancel_cita(db, cita_id, actor_user=current_user)
+    except cita_service.CitaNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except cita_service.NotOwnerOrProviderError as exc:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+
+
+@router.get("/{provider_profile_id}/availability", response_model=list[AvailabilityBlockResponse])
+def get_provider_availability(
+    provider_profile_id: int,
+    fecha: date = Query(...),
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    try:
+        return cita_service.get_availability(db, provider_profile_id, fecha)
+    except cita_service.ProviderProfileNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+
+
+@router.post(
+    "/{provider_profile_id}/citas",
+    response_model=CitaResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_cita(
+    provider_profile_id: int,
+    data: BookingCreateRequest,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    try:
+        return cita_service.create_cita(db, provider_profile_id, current_user.id, data)
+    except cita_service.ProviderProfileNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except (
+        cita_service.InvalidDateError,
+        cita_service.MisalignedTimeError,
+        cita_service.OutOfScheduleError,
+    ) as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)
+        )
+    except cita_service.OverlapError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
 
 
 @router.get("/{provider_profile_id}/schedule", response_model=list[ScheduleBlockResponse])

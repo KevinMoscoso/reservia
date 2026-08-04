@@ -17,6 +17,10 @@ def get_by_id(db: DBSession, id: int) -> Optional[Equipo]:
     return db.query(Equipo).filter(Equipo.id == id).first()
 
 
+def get_by_id_for_update(db: DBSession, id: int) -> Optional[Equipo]:
+    return db.query(Equipo).filter(Equipo.id == id).with_for_update().first()
+
+
 def get_by_codigo(db: DBSession, codigo: str) -> Optional[Equipo]:
     return db.query(Equipo).filter(Equipo.codigo == codigo).first()
 

@@ -20,6 +20,15 @@ def get_profile_by_id(db: DBSession, id: int) -> Optional[ProviderProfile]:
     return db.query(ProviderProfile).filter(ProviderProfile.id == id).first()
 
 
+def get_profile_by_id_for_update(db: DBSession, id: int) -> Optional[ProviderProfile]:
+    return (
+        db.query(ProviderProfile)
+        .filter(ProviderProfile.id == id)
+        .with_for_update()
+        .first()
+    )
+
+
 def create_profile(
     db: DBSession, user_id: int, slot_duration_minutes: int = 30
 ) -> ProviderProfile:

@@ -17,6 +17,10 @@ def get_by_id(db: DBSession, id: int) -> Optional[Sala]:
     return db.query(Sala).filter(Sala.id == id).first()
 
 
+def get_by_id_for_update(db: DBSession, id: int) -> Optional[Sala]:
+    return db.query(Sala).filter(Sala.id == id).with_for_update().first()
+
+
 def list_all(db: DBSession) -> list[Sala]:
     return db.query(Sala).all()
 
