@@ -11,6 +11,13 @@ import SalasPage from './pages/SalasPage';
 import EquiposPage from './pages/EquiposPage';
 import ProviderDashboardPage from './pages/ProviderDashboardPage';
 import ClientDashboardPage from './pages/ClientDashboardPage';
+import ReservarSalasPage from './pages/ReservarSalasPage';
+import ReservarSalaDetailPage from './pages/ReservarSalaDetailPage';
+import ReservarEquiposPage from './pages/ReservarEquiposPage';
+import ReservarEquipoDetailPage from './pages/ReservarEquipoDetailPage';
+import ProveedoresPage from './pages/ProveedoresPage';
+import AgendarCitaPage from './pages/AgendarCitaPage';
+import MisReservasPage from './pages/MisReservasPage';
 
 function RootRedirect() {
   const { user, loading } = useAuth();
@@ -80,6 +87,62 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['client']}>
                 <ClientDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recursos/salas"
+            element={
+              <ProtectedRoute>
+                <ReservarSalasPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recursos/salas/:id/reservar"
+            element={
+              <ProtectedRoute>
+                <ReservarSalaDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recursos/equipos"
+            element={
+              <ProtectedRoute>
+                <ReservarEquiposPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recursos/equipos/:id/reservar"
+            element={
+              <ProtectedRoute>
+                <ReservarEquipoDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/proveedores"
+            element={
+              <ProtectedRoute>
+                <ProveedoresPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/proveedores/:id/agendar"
+            element={
+              <ProtectedRoute>
+                <AgendarCitaPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mis-reservas"
+            element={
+              <ProtectedRoute>
+                <MisReservasPage />
               </ProtectedRoute>
             }
           />

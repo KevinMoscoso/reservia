@@ -15,5 +15,31 @@ function addScheduleBlock(payload) {
 function deactivateScheduleBlock(id) {
   return apiFetch(`/providers/me/schedule/${id}/deactivate`, { method: 'PATCH' });
 }
+function listProviders() {
+  return apiFetch('/providers/');
+}
+function getProviderAvailability(id, fecha) {
+  return apiFetch(`/providers/${id}/availability?fecha=${fecha}`);
+}
+function createCita(id, payload) {
+  return apiFetch(`/providers/${id}/citas`, { method: 'POST', body: JSON.stringify(payload) });
+}
+function listMisCitas() {
+  return apiFetch('/providers/citas/me');
+}
+function cancelCita(id) {
+  return apiFetch(`/providers/citas/${id}/cancel`, { method: 'PATCH' });
+}
 
-export { getMyProfile, updateMyProfile, getMySchedule, addScheduleBlock, deactivateScheduleBlock };
+export {
+  getMyProfile,
+  updateMyProfile,
+  getMySchedule,
+  addScheduleBlock,
+  deactivateScheduleBlock,
+  listProviders,
+  getProviderAvailability,
+  createCita,
+  listMisCitas,
+  cancelCita,
+};

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Layout({ children }) {
@@ -28,6 +28,12 @@ function Layout({ children }) {
           </button>
         </div>
       </header>
+      <nav className="flex gap-4 border-b border-gray-200 bg-white px-6 py-2 text-sm">
+        <Link to="/recursos/salas">Salas</Link>
+        <Link to="/recursos/equipos">Equipos</Link>
+        <Link to="/proveedores">Proveedores</Link>
+        <Link to="/mis-reservas">Mis reservas</Link>
+      </nav>
       <main className="p-6">{children}</main>
     </div>
   );
