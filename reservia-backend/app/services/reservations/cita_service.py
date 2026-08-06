@@ -85,9 +85,6 @@ def get_availability(db, provider_profile_id: int, fecha: date) -> list[dict]:
 def create_cita(
     db, provider_profile_id: int, user_id: int, data: BookingCreateRequest
 ) -> Cita:
-    # PASO 1: bloquea la fila de provider_profiles (no provider_schedules).
-    # Ver explicacion detallada del mecanismo, y de una limitacion detectada,
-    # en el reporte de entrega de este prompt.
     profile = provider_repository.get_profile_by_id_for_update(db, provider_profile_id)
     if profile is None:
         raise ProviderProfileNotFoundError("perfil de proveedor no encontrado")
@@ -157,6 +154,26 @@ def create_cita(
 
 def list_my_citas(db, user_id: int) -> list[Cita]:
     return cita_repository.list_by_user(db, user_id)
+
+
+def list_all_reservas(db) -> list[dict]:
+    rows = cita_repository.list_all_with_details(db)
+    return [
+        {
+            "id": cita.id,
+            "provider_profile_id": cita.provider_profile_id,
+            "provider_full_name": provider_full_name,
+            "user_id": cita.user_id,
+            "user_full_name": client_full_name,
+            "user_email": client_email,
+            "fecha": cita.fecha,
+            "hora_inicio": cita.hora_inicio,
+            "hora_fin": cita.hora_fin,
+            "motivo": cita.motivo,
+            "estado": cita.estado,
+        }
+        for cita, provider_full_name, client_full_name, client_email in rows
+    ]
 
 
 def cancel_cita(db, cita_id: int, actor_user: User) -> Cita:

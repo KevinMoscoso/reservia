@@ -3,8 +3,10 @@ from typing import Optional
 
 from sqlalchemy.orm import Session as DBSession
 
+from app.models.auth.user import User
 from app.models.reservations.reserva_equipo import ReservaEquipo
 from app.models.reservations.reserva_sala import EstadoReserva
+from app.models.resources.equipo import Equipo
 
 
 def create(
@@ -58,6 +60,17 @@ def list_confirmadas_by_equipo_fecha(
 
 def list_by_user(db: DBSession, user_id: int) -> list[ReservaEquipo]:
     return db.query(ReservaEquipo).filter(ReservaEquipo.user_id == user_id).all()
+
+
+def list_all_with_details(db: DBSession) -> list[tuple[ReservaEquipo, str, str, str]]:
+    results = (
+        db.query(ReservaEquipo, Equipo.nombre, User.full_name, User.email)
+        .join(Equipo, ReservaEquipo.equipo_id == Equipo.id)
+        .join(User, ReservaEquipo.user_id == User.id)
+        .order_by(ReservaEquipo.fecha.desc())
+        .all()
+    )
+    return results
 
 
 def cancel(

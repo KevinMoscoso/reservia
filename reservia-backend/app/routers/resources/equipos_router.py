@@ -7,6 +7,7 @@ from app.core.database import get_db
 from app.middlewares.auth_middleware import get_current_user_dep, require_role
 from app.models.auth.user import User, UserRole
 from app.schemas.reservations.reserva import (
+    AdminReservaEquipoResponse,
     AvailabilityBlockResponse,
     BookingCreateRequest,
     ReservaEquipoResponse,
@@ -48,6 +49,14 @@ def list_my_reservas_equipos(
     current_user: User = Depends(get_current_user_dep),
 ):
     return reserva_equipo_service.list_my_reservas(db, current_user.id)
+
+
+@router.get("/reservas", response_model=list[AdminReservaEquipoResponse])
+def list_all_reservas_equipos(
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.admin.value)),
+):
+    return reserva_equipo_service.list_all_reservas(db)
 
 
 @router.patch("/reservas/{reserva_id}/cancel", response_model=ReservaEquipoResponse)

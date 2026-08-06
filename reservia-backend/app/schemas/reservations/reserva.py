@@ -62,3 +62,51 @@ class AvailabilityBlockResponse(BaseModel):
     hora_inicio: time
     hora_fin: time
     disponible: bool
+
+
+class AdminReservaSalaResponse(BaseModel):
+    id: int
+    sala_id: int
+    sala_nombre: str
+    user_id: int
+    user_full_name: str
+    user_email: str
+    fecha: date
+    hora_inicio: time
+    hora_fin: time
+    motivo: str
+    estado: EstadoReserva
+
+    model_config = {"from_attributes": True}
+
+
+class AdminReservaEquipoResponse(BaseModel):
+    id: int
+    equipo_id: int
+    equipo_nombre: str
+    user_id: int
+    user_full_name: str
+    user_email: str
+    fecha: date
+    hora_inicio: time
+    hora_fin: time
+    motivo: str
+    estado: EstadoReserva
+
+    model_config = {"from_attributes": True}
+
+
+class AdminCitaResponse(BaseModel):
+    id: int
+    provider_profile_id: int
+    provider_full_name: str
+    user_id: int
+    user_full_name: str
+    user_email: str
+    fecha: date
+    hora_inicio: time
+    hora_fin: time
+    motivo: str
+    estado: EstadoReserva
+
+    model_config = {"from_attributes": True}

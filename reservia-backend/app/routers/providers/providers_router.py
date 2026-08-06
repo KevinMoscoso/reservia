@@ -14,6 +14,7 @@ from app.schemas.providers.provider import (
     ScheduleBlockResponse,
 )
 from app.schemas.reservations.reserva import (
+    AdminCitaResponse,
     AvailabilityBlockResponse,
     BookingCreateRequest,
     CitaResponse,
@@ -102,6 +103,14 @@ def list_my_citas(
     current_user: User = Depends(get_current_user_dep),
 ):
     return cita_service.list_my_citas(db, current_user.id)
+
+
+@router.get("/citas", response_model=list[AdminCitaResponse])
+def list_all_citas(
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.admin.value)),
+):
+    return cita_service.list_all_reservas(db)
 
 
 @router.patch("/citas/{cita_id}/cancel", response_model=CitaResponse)

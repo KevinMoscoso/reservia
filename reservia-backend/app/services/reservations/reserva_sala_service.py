@@ -73,9 +73,6 @@ def get_availability(db, sala_id: int, fecha: date) -> list[dict]:
 
 
 def create_reserva(db, sala_id: int, user_id: int, data: BookingCreateRequest) -> ReservaSala:
-    # PASO 1: bloquea la fila de la sala (no las reservas). Ver explicacion
-    # detallada del mecanismo, y de una limitacion detectada, en el reporte
-    # de entrega de este prompt.
     sala = sala_repository.get_by_id_for_update(db, sala_id)
     if sala is None:
         raise SalaNotFoundError("sala no encontrada")
@@ -134,6 +131,26 @@ def create_reserva(db, sala_id: int, user_id: int, data: BookingCreateRequest) -
 
 def list_my_reservas(db, user_id: int) -> list[ReservaSala]:
     return reserva_sala_repository.list_by_user(db, user_id)
+
+
+def list_all_reservas(db) -> list[dict]:
+    rows = reserva_sala_repository.list_all_with_details(db)
+    return [
+        {
+            "id": reserva.id,
+            "sala_id": reserva.sala_id,
+            "sala_nombre": sala_nombre,
+            "user_id": reserva.user_id,
+            "user_full_name": user_full_name,
+            "user_email": user_email,
+            "fecha": reserva.fecha,
+            "hora_inicio": reserva.hora_inicio,
+            "hora_fin": reserva.hora_fin,
+            "motivo": reserva.motivo,
+            "estado": reserva.estado,
+        }
+        for reserva, sala_nombre, user_full_name, user_email in rows
+    ]
 
 
 def cancel_reserva(db, reserva_id: int, actor_user: User) -> ReservaSala:

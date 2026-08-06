@@ -3,7 +3,9 @@ from typing import Optional
 
 from sqlalchemy.orm import Session as DBSession
 
+from app.models.auth.user import User
 from app.models.reservations.reserva_sala import EstadoReserva, ReservaSala
+from app.models.resources.sala import Sala
 
 
 def create(
@@ -57,6 +59,21 @@ def list_confirmadas_by_sala_fecha(
 
 def list_by_user(db: DBSession, user_id: int) -> list[ReservaSala]:
     return db.query(ReservaSala).filter(ReservaSala.user_id == user_id).all()
+
+
+def list_all_with_details(db: DBSession) -> list[tuple[ReservaSala, str, str, str]]:
+    """
+    Retorna tuplas (reserva, sala_nombre, user_full_name, user_email),
+    ordenadas por fecha descendente.
+    """
+    results = (
+        db.query(ReservaSala, Sala.nombre, User.full_name, User.email)
+        .join(Sala, ReservaSala.sala_id == Sala.id)
+        .join(User, ReservaSala.user_id == User.id)
+        .order_by(ReservaSala.fecha.desc())
+        .all()
+    )
+    return results
 
 
 def cancel(db: DBSession, reserva: ReservaSala, cancelled_by_user_id: int) -> ReservaSala:

@@ -138,6 +138,26 @@ def list_my_reservas(db, user_id: int) -> list[ReservaEquipo]:
     return reserva_equipo_repository.list_by_user(db, user_id)
 
 
+def list_all_reservas(db) -> list[dict]:
+    rows = reserva_equipo_repository.list_all_with_details(db)
+    return [
+        {
+            "id": reserva.id,
+            "equipo_id": reserva.equipo_id,
+            "equipo_nombre": equipo_nombre,
+            "user_id": reserva.user_id,
+            "user_full_name": user_full_name,
+            "user_email": user_email,
+            "fecha": reserva.fecha,
+            "hora_inicio": reserva.hora_inicio,
+            "hora_fin": reserva.hora_fin,
+            "motivo": reserva.motivo,
+            "estado": reserva.estado,
+        }
+        for reserva, equipo_nombre, user_full_name, user_email in rows
+    ]
+
+
 def cancel_reserva(db, reserva_id: int, actor_user: User) -> ReservaEquipo:
     reserva = reserva_equipo_repository.get_by_id(db, reserva_id)
     if reserva is None:

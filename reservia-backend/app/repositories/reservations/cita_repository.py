@@ -1,8 +1,10 @@
 from datetime import date, datetime, time
 from typing import Optional
 
-from sqlalchemy.orm import Session as DBSession
+from sqlalchemy.orm import Session as DBSession, aliased
 
+from app.models.auth.user import User
+from app.models.providers.provider_profile import ProviderProfile
 from app.models.reservations.cita import Cita
 from app.models.reservations.reserva_sala import EstadoReserva
 
@@ -58,6 +60,24 @@ def list_confirmadas_by_provider_fecha(
 
 def list_by_user(db: DBSession, user_id: int) -> list[Cita]:
     return db.query(Cita).filter(Cita.user_id == user_id).all()
+
+
+def list_all_with_details(db: DBSession) -> list[tuple[Cita, str, str, str]]:
+    """
+    Retorna tuplas (cita, provider_full_name, client_full_name, client_email).
+    """
+    ProviderUser = aliased(User)
+    ClientUser = aliased(User)
+
+    results = (
+        db.query(Cita, ProviderUser.full_name, ClientUser.full_name, ClientUser.email)
+        .join(ProviderProfile, Cita.provider_profile_id == ProviderProfile.id)
+        .join(ProviderUser, ProviderProfile.user_id == ProviderUser.id)
+        .join(ClientUser, Cita.user_id == ClientUser.id)
+        .order_by(Cita.fecha.desc())
+        .all()
+    )
+    return results
 
 
 def cancel(db: DBSession, cita: Cita, cancelled_by_user_id: int) -> Cita:
