@@ -20,6 +20,9 @@ function AdminDashboardPage() {
         <Link to="/admin/equipos" className="text-blue-600 hover:underline">
           Gestionar equipos
         </Link>
+        <Link to="/admin/reservas" className="text-blue-600 hover:underline">
+          Ver todas las reservas
+        </Link>
       </div>
     </Layout>
   );

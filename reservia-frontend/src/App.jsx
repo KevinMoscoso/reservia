@@ -18,6 +18,7 @@ import ReservarEquipoDetailPage from './pages/ReservarEquipoDetailPage';
 import ProveedoresPage from './pages/ProveedoresPage';
 import AgendarCitaPage from './pages/AgendarCitaPage';
 import MisReservasPage from './pages/MisReservasPage';
+import AdminReservasPage from './pages/AdminReservasPage';
 
 function RootRedirect() {
   const { user, loading } = useAuth();
@@ -71,6 +72,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <EquiposPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reservas"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <AdminReservasPage />
               </ProtectedRoute>
             }
           />

@@ -30,6 +30,9 @@ function listMisCitas() {
 function cancelCita(id) {
   return apiFetch(`/providers/citas/${id}/cancel`, { method: 'PATCH' });
 }
+function listAllCitas() {
+  return apiFetch('/providers/citas');
+}
 
 export {
   getMyProfile,
@@ -42,4 +45,5 @@ export {
   createCita,
   listMisCitas,
   cancelCita,
+  listAllCitas,
 };

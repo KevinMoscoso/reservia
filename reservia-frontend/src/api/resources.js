@@ -48,6 +48,12 @@ function listMisReservasEquipos() {
 function cancelReservaEquipo(id) {
   return apiFetch(`/resources/equipos/reservas/${id}/cancel`, { method: 'PATCH' });
 }
+function listAllReservasSalas() {
+  return apiFetch('/resources/salas/reservas');
+}
+function listAllReservasEquipos() {
+  return apiFetch('/resources/equipos/reservas');
+}
 
 export {
   listSalas,
@@ -66,4 +72,6 @@ export {
   createReservaEquipo,
   listMisReservasEquipos,
   cancelReservaEquipo,
+  listAllReservasSalas,
+  listAllReservasEquipos,
 };
