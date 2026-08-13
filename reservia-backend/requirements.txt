@@ -4,8 +4,8 @@ sqlalchemy
 pymysql
 alembic
 passlib[bcrypt]
-bcrypt<5.0.0
 pydantic
 email-validator
 pytest
 httpx
+apscheduler

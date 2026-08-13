@@ -4,10 +4,12 @@ from app.core import config
 from app.models.auth.user import User, UserRole
 from app.models.reservations.cita import Cita
 from app.models.reservations.reserva_sala import EstadoReserva
+from app.repositories.auth import user_repository
 from app.repositories.providers import provider_repository
 from app.repositories.reservations import cita_repository
 from app.repositories.shared import audit_repository
 from app.schemas.reservations.reserva import BookingCreateRequest
+from app.services.notifications import notification_service
 from app.services.reservations.availability_service import (
     add_minutes,
     generate_slots,
@@ -147,6 +149,22 @@ def create_cita(
         entity_type="cita",
         entity_id=cita.id,
         metadata=None,
+    )
+
+    provider_user = user_repository.get_by_id(db, profile.user_id)
+    client_user = user_repository.get_by_id(db, user_id)
+
+    notification_service.create_notification(
+        db, user_id=user_id, tipo="cita_confirmada",
+        mensaje=f"Tu cita con {provider_user.full_name} el {data.fecha} a las "
+                f"{data.hora_inicio.strftime('%H:%M')} fue confirmada.",
+        entity_type="cita", entity_id=cita.id,
+    )
+    notification_service.create_notification(
+        db, user_id=profile.user_id, tipo="cita_confirmada",
+        mensaje=f"Nueva cita agendada por {client_user.full_name} el {data.fecha} "
+                f"a las {data.hora_inicio.strftime('%H:%M')}.",
+        entity_type="cita", entity_id=cita.id,
     )
 
     return cita

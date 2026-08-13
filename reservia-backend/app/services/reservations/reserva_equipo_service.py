@@ -9,6 +9,7 @@ from app.repositories.reservations import reserva_equipo_repository
 from app.repositories.resources import equipo_repository
 from app.repositories.shared import audit_repository
 from app.schemas.reservations.reserva import BookingCreateRequest
+from app.services.notifications import notification_service
 from app.services.reservations.availability_service import (
     add_minutes,
     generate_slots,
@@ -129,6 +130,16 @@ def create_reserva(
         entity_type="reserva_equipo",
         entity_id=reserva.id,
         metadata=None,
+    )
+
+    notification_service.create_notification(
+        db,
+        user_id=user_id,
+        tipo="reserva_confirmada",
+        mensaje=f"Tu reserva de '{equipo.nombre}' para el {data.fecha} a las "
+                f"{data.hora_inicio.strftime('%H:%M')} fue confirmada.",
+        entity_type="reserva_equipo",
+        entity_id=reserva.id,
     )
 
     return reserva

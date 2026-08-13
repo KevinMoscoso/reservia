@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, DateTime, Enum, ForeignKey, String, Time
+from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKey, String, Time
 from sqlalchemy.dialects.mysql import BIGINT
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -26,6 +26,7 @@ class Cita(Base):
     )
     cancelled_at = Column(DateTime, nullable=True)
     cancelled_by_user_id = Column(BIGINT(unsigned=True), ForeignKey("users.id"), nullable=True)
+    recordatorio_enviado = Column(Boolean, nullable=False, server_default="0")
     created_at = Column(DateTime, nullable=False, server_default=func.now())
     updated_at = Column(
         DateTime, nullable=False, server_default=func.now(), onupdate=func.now()

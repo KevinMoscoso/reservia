@@ -17,6 +17,7 @@ from app.models.providers.provider_schedule import ProviderSchedule
 from app.models.reservations.reserva_sala import ReservaSala
 from app.models.reservations.reserva_equipo import ReservaEquipo
 from app.models.reservations.cita import Cita
+from app.models.notifications.notificacion import Notificacion
 
 TEST_SQLALCHEMY_DATABASE_URL = (
     f"mysql+pymysql://{app_config.DB_USER}:{app_config.DB_PASSWORD}"
@@ -58,6 +59,7 @@ def client():
 @pytest.fixture(autouse=True)
 def _clean_all_tables(db_session):
     yield
+    db_session.query(Notificacion).delete()
     db_session.query(Cita).delete()
     db_session.query(ReservaEquipo).delete()
     db_session.query(ReservaSala).delete()
