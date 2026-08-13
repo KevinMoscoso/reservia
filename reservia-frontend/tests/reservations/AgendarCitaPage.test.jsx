@@ -60,6 +60,11 @@ describe('AgendarCitaPage', () => {
         status: 200,
         json: async () => CLIENT_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/providers/': () => ({
         ok: true,
         status: 200,
@@ -88,6 +93,11 @@ describe('AgendarCitaPage', () => {
         ok: true,
         status: 200,
         json: async () => CLIENT_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/providers/': () => ({
         ok: true,
@@ -136,6 +146,11 @@ describe('AgendarCitaPage', () => {
         ok: true,
         status: 200,
         json: async () => CLIENT_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/providers/': () => ({
         ok: true,

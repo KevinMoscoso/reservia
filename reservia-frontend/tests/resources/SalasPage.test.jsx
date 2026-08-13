@@ -53,6 +53,11 @@ describe('SalasPage', () => {
         status: 200,
         json: async () => ADMIN_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/resources/salas/': () => ({
         ok: true,
         status: 200,
@@ -74,6 +79,11 @@ describe('SalasPage', () => {
         ok: true,
         status: 200,
         json: async () => ADMIN_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/resources/salas/': () => ({
         ok: true,
@@ -113,6 +123,11 @@ describe('SalasPage', () => {
         status: 200,
         json: async () => ADMIN_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/resources/salas/': () => ({
         ok: true,
         status: 200,
@@ -146,6 +161,11 @@ describe('SalasPage', () => {
         ok: true,
         status: 200,
         json: async () => ADMIN_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/resources/salas/': () => ({
         ok: true,

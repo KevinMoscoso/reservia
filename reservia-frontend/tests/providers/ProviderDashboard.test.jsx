@@ -53,6 +53,11 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -86,6 +91,11 @@ describe('ProviderDashboardPage', () => {
         ok: true,
         status: 200,
         json: async () => PROVIDER_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/providers/me/profile': () => ({
         ok: true,
@@ -122,6 +132,11 @@ describe('ProviderDashboardPage', () => {
         ok: true,
         status: 200,
         json: async () => PROVIDER_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/providers/me/profile': () => ({
         ok: true,
@@ -167,6 +182,11 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -205,6 +225,11 @@ describe('ProviderDashboardPage', () => {
         ok: true,
         status: 200,
         json: async () => PROVIDER_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/providers/me/profile': () => ({
         ok: true,

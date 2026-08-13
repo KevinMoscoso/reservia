@@ -5,6 +5,32 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthProvider } from '../../src/context/AuthContext';
 import Layout from '../../src/components/Layout';
 
+const CLIENT_USER = {
+  id: 7,
+  email: 'cliente@example.com',
+  full_name: 'Cliente Uno',
+  role: 'client',
+  status: 'active',
+};
+
+function mockFetchRoutes(routes) {
+  global.fetch = vi.fn((url, options = {}) => {
+    const method = options.method || 'GET';
+    const key = `${method} ${url}`;
+    const handler = routes[key];
+
+    if (!handler) {
+      return Promise.resolve({
+        ok: false,
+        status: 404,
+        json: async () => ({ detail: `no mock for ${key}` }),
+      });
+    }
+
+    return Promise.resolve(handler());
+  });
+}
+
 function renderWithLayout() {
   return render(
     <MemoryRouter initialEntries={['/client']}>
@@ -27,27 +53,27 @@ function renderWithLayout() {
 
 describe('Logout', () => {
   beforeEach(() => {
-    global.fetch = vi.fn();
+    vi.restoreAllMocks();
   });
 
   it('logout_calls_api_and_redirects_to_login', async () => {
-    fetch
-      .mockResolvedValueOnce({
+    mockFetchRoutes({
+      'GET /api/auth/me': () => ({
         ok: true,
         status: 200,
-        json: async () => ({
-          id: 7,
-          email: 'cliente@example.com',
-          full_name: 'Cliente Uno',
-          role: 'client',
-          status: 'active',
-        }),
-      })
-      .mockResolvedValueOnce({
+        json: async () => CLIENT_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
+      'POST /api/auth/logout': () => ({
         ok: true,
         status: 200,
         json: async () => ({ detail: 'logout ok' }),
-      });
+      }),
+    });
 
     const user = userEvent.setup();
     renderWithLayout();

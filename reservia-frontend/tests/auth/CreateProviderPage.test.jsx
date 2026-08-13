@@ -5,6 +5,32 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthProvider } from '../../src/context/AuthContext';
 import CreateProviderPage from '../../src/pages/CreateProviderPage';
 
+const ADMIN_USER = {
+  id: 1,
+  email: 'admin@example.com',
+  full_name: 'Admin Uno',
+  role: 'admin',
+  status: 'active',
+};
+
+function mockFetchRoutes(routes) {
+  global.fetch = vi.fn((url, options = {}) => {
+    const method = options.method || 'GET';
+    const key = `${method} ${url}`;
+    const handler = routes[key];
+
+    if (!handler) {
+      return Promise.resolve({
+        ok: false,
+        status: 404,
+        json: async () => ({ detail: `no mock for ${key}` }),
+      });
+    }
+
+    return Promise.resolve(handler());
+  });
+}
+
 function renderCreateProviderPage() {
   return render(
     <MemoryRouter initialEntries={['/admin/providers/new']}>
@@ -17,23 +43,22 @@ function renderCreateProviderPage() {
 
 describe('CreateProviderPage', () => {
   beforeEach(() => {
-    global.fetch = vi.fn();
+    vi.restoreAllMocks();
   });
 
   it('create_provider_shows_success_confirmation', async () => {
-    fetch
-      .mockResolvedValueOnce({
+    mockFetchRoutes({
+      'GET /api/auth/me': () => ({
         ok: true,
         status: 200,
-        json: async () => ({
-          id: 5,
-          email: 'admin@example.com',
-          full_name: 'Admin Uno',
-          role: 'admin',
-          status: 'active',
-        }),
-      })
-      .mockResolvedValueOnce({
+        json: async () => ADMIN_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
+      'POST /api/admin/providers': () => ({
         ok: true,
         status: 201,
         json: async () => ({
@@ -43,7 +68,8 @@ describe('CreateProviderPage', () => {
           role: 'provider',
           status: 'active',
         }),
-      });
+      }),
+    });
 
     const user = userEvent.setup();
     renderCreateProviderPage();

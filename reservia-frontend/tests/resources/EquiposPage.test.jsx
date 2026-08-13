@@ -53,6 +53,11 @@ describe('EquiposPage', () => {
         status: 200,
         json: async () => ADMIN_USER,
       }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
       'GET /api/resources/equipos/': () => ({
         ok: true,
         status: 200,
@@ -74,6 +79,11 @@ describe('EquiposPage', () => {
         ok: true,
         status: 200,
         json: async () => ADMIN_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/resources/equipos/': () => ({
         ok: true,
@@ -112,6 +122,11 @@ describe('EquiposPage', () => {
         ok: true,
         status: 200,
         json: async () => ADMIN_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
       }),
       'GET /api/resources/equipos/': () => ({
         ok: true,
