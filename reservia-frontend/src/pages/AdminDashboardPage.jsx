@@ -23,6 +23,15 @@ function AdminDashboardPage() {
         <Link to="/admin/reservas" className="text-blue-600 hover:underline">
           Ver todas las reservas
         </Link>
+        <Link to="/admin/reportes/ocupacion" className="text-blue-600 hover:underline">
+          Reporte de ocupación
+        </Link>
+        <Link to="/admin/reportes/proveedores" className="text-blue-600 hover:underline">
+          Actividad de proveedores
+        </Link>
+        <Link to="/admin/reportes/sistema" className="text-blue-600 hover:underline">
+          Actividad del sistema
+        </Link>
       </div>
     </Layout>
   );

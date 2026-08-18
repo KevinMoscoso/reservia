@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import {
@@ -227,6 +228,12 @@ function ProviderDashboardPage() {
             Agregar bloque
           </button>
         </form>
+      </section>
+
+      <section className="mt-8">
+        <Link to="/reportes/proveedores" className="text-blue-600 hover:underline">
+          Ver mi actividad
+        </Link>
       </section>
     </Layout>
   );

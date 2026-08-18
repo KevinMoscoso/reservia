@@ -19,6 +19,9 @@ import ProveedoresPage from './pages/ProveedoresPage';
 import AgendarCitaPage from './pages/AgendarCitaPage';
 import MisReservasPage from './pages/MisReservasPage';
 import AdminReservasPage from './pages/AdminReservasPage';
+import OccupancyReportPage from './pages/OccupancyReportPage';
+import ProviderActivityReportPage from './pages/ProviderActivityReportPage';
+import SystemActivityReportPage from './pages/SystemActivityReportPage';
 
 function RootRedirect() {
   const { user, loading } = useAuth();
@@ -80,6 +83,30 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <AdminReservasPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reportes/ocupacion"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <OccupancyReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reportes/sistema"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <SystemActivityReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reportes/proveedores"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'provider']}>
+                <ProviderActivityReportPage />
               </ProtectedRoute>
             }
           />
