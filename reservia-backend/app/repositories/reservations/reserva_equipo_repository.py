@@ -73,6 +73,25 @@ def list_all_with_details(db: DBSession) -> list[tuple[ReservaEquipo, str, str, 
     return results
 
 
+def list_confirmadas_by_fecha_range(
+    db: DBSession, fecha_inicio: date, fecha_fin: date
+) -> list[ReservaEquipo]:
+    return db.query(ReservaEquipo).filter(
+        ReservaEquipo.estado == EstadoReserva.confirmada,
+        ReservaEquipo.fecha >= fecha_inicio,
+        ReservaEquipo.fecha <= fecha_fin,
+    ).all()
+
+
+def list_created_in_range(
+    db: DBSession, start_dt: datetime, end_dt: datetime
+) -> list[ReservaEquipo]:
+    return db.query(ReservaEquipo).filter(
+        ReservaEquipo.created_at >= start_dt,
+        ReservaEquipo.created_at < end_dt,
+    ).all()
+
+
 def cancel(
     db: DBSession, reserva: ReservaEquipo, cancelled_by_user_id: int
 ) -> ReservaEquipo:

@@ -8,6 +8,7 @@ from app.routers.auth.admin_users_router import router as admin_users_router
 from app.routers.auth.auth_router import router as auth_router
 from app.routers.notifications.notifications_router import router as notifications_router
 from app.routers.providers.providers_router import router as providers_router
+from app.routers.reports.reports_router import router as reports_router
 from app.routers.resources.equipos_router import router as equipos_router
 from app.routers.resources.salas_router import router as salas_router
 from app.services.notifications.reminder_job import check_and_send_reminders
@@ -44,3 +45,4 @@ app.include_router(salas_router)
 app.include_router(equipos_router)
 app.include_router(providers_router)
 app.include_router(notifications_router)
+app.include_router(reports_router)

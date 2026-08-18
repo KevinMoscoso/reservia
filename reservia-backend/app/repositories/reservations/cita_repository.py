@@ -80,6 +80,27 @@ def list_all_with_details(db: DBSession) -> list[tuple[Cita, str, str, str]]:
     return results
 
 
+def list_by_fecha_range(
+    db: DBSession, fecha_inicio: date, fecha_fin: date, provider_profile_id: int = None
+) -> list[Cita]:
+    query = db.query(Cita).filter(
+        Cita.fecha >= fecha_inicio,
+        Cita.fecha <= fecha_fin,
+    )
+    if provider_profile_id is not None:
+        query = query.filter(Cita.provider_profile_id == provider_profile_id)
+    return query.all()
+
+
+def list_created_in_range(
+    db: DBSession, start_dt: datetime, end_dt: datetime
+) -> list[Cita]:
+    return db.query(Cita).filter(
+        Cita.created_at >= start_dt,
+        Cita.created_at < end_dt,
+    ).all()
+
+
 def cancel(db: DBSession, cita: Cita, cancelled_by_user_id: int) -> Cita:
     cita.estado = EstadoReserva.cancelada
     cita.cancelled_at = datetime.utcnow()
