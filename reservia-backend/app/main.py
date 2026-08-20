@@ -4,6 +4,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI
 
 from app.core import config
+from app.routers.audit.audit_router import router as audit_router
 from app.routers.auth.admin_users_router import router as admin_users_router
 from app.routers.auth.auth_router import router as auth_router
 from app.routers.notifications.notifications_router import router as notifications_router
@@ -46,3 +47,4 @@ app.include_router(equipos_router)
 app.include_router(providers_router)
 app.include_router(notifications_router)
 app.include_router(reports_router)
+app.include_router(audit_router)
