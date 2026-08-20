@@ -22,6 +22,7 @@ import AdminReservasPage from './pages/AdminReservasPage';
 import OccupancyReportPage from './pages/OccupancyReportPage';
 import ProviderActivityReportPage from './pages/ProviderActivityReportPage';
 import SystemActivityReportPage from './pages/SystemActivityReportPage';
+import AuditLogPage from './pages/AuditLogPage';
 
 function RootRedirect() {
   const { user, loading } = useAuth();
@@ -99,6 +100,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <SystemActivityReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/auditoria"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <AuditLogPage />
               </ProtectedRoute>
             }
           />

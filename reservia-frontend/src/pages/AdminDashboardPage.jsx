@@ -32,6 +32,9 @@ function AdminDashboardPage() {
         <Link to="/admin/reportes/sistema" className="text-blue-600 hover:underline">
           Actividad del sistema
         </Link>
+        <Link to="/admin/auditoria" className="text-blue-600 hover:underline">
+          Ver auditoria del sistema
+        </Link>
       </div>
     </Layout>
   );
