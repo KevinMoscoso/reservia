@@ -24,14 +24,14 @@ function getProviderAvailability(id, fecha) {
 function createCita(id, payload) {
   return apiFetch(`/providers/${id}/citas`, { method: 'POST', body: JSON.stringify(payload) });
 }
-function listMisCitas() {
-  return apiFetch('/providers/citas/me');
+function listMisCitas(page = 1, pageSize = 20) {
+  return apiFetch(`/providers/citas/me?page=${page}&page_size=${pageSize}`);
 }
 function cancelCita(id) {
   return apiFetch(`/providers/citas/${id}/cancel`, { method: 'PATCH' });
 }
-function listAllCitas() {
-  return apiFetch('/providers/citas');
+function listAllCitas(page = 1, pageSize = 20) {
+  return apiFetch(`/providers/citas?page=${page}&page_size=${pageSize}`);
 }
 
 export {

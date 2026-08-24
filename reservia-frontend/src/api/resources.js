@@ -30,8 +30,8 @@ function getSalaAvailability(id, fecha) {
 function createReservaSala(id, payload) {
   return apiFetch(`/resources/salas/${id}/reservas`, { method: 'POST', body: JSON.stringify(payload) });
 }
-function listMisReservasSalas() {
-  return apiFetch('/resources/salas/reservas/me');
+function listMisReservasSalas(page = 1, pageSize = 20) {
+  return apiFetch(`/resources/salas/reservas/me?page=${page}&page_size=${pageSize}`);
 }
 function cancelReservaSala(id) {
   return apiFetch(`/resources/salas/reservas/${id}/cancel`, { method: 'PATCH' });
@@ -42,17 +42,17 @@ function getEquipoAvailability(id, fecha) {
 function createReservaEquipo(id, payload) {
   return apiFetch(`/resources/equipos/${id}/reservas`, { method: 'POST', body: JSON.stringify(payload) });
 }
-function listMisReservasEquipos() {
-  return apiFetch('/resources/equipos/reservas/me');
+function listMisReservasEquipos(page = 1, pageSize = 20) {
+  return apiFetch(`/resources/equipos/reservas/me?page=${page}&page_size=${pageSize}`);
 }
 function cancelReservaEquipo(id) {
   return apiFetch(`/resources/equipos/reservas/${id}/cancel`, { method: 'PATCH' });
 }
-function listAllReservasSalas() {
-  return apiFetch('/resources/salas/reservas');
+function listAllReservasSalas(page = 1, pageSize = 20) {
+  return apiFetch(`/resources/salas/reservas?page=${page}&page_size=${pageSize}`);
 }
-function listAllReservasEquipos() {
-  return apiFetch('/resources/equipos/reservas');
+function listAllReservasEquipos(page = 1, pageSize = 20) {
+  return apiFetch(`/resources/equipos/reservas?page=${page}&page_size=${pageSize}`);
 }
 
 export {

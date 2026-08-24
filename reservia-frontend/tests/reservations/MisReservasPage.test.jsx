@@ -58,53 +58,71 @@ describe('MisReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas/me': () => ({
+      'GET /api/resources/salas/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 1,
-            sala_id: 10,
-            user_id: 1,
-            fecha: '2026-08-10',
-            hora_inicio: '09:00:00',
-            hora_fin: '09:30:00',
-            motivo: 'Reunion de sala',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 1,
+              sala_id: 10,
+              user_id: 1,
+              fecha: '2026-08-10',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion de sala',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/resources/equipos/reservas/me': () => ({
+      'GET /api/resources/equipos/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 2,
-            equipo_id: 20,
-            user_id: 1,
-            fecha: '2026-08-11',
-            hora_inicio: '10:00:00',
-            hora_fin: '10:30:00',
-            motivo: 'Prestamo de equipo',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 2,
+              equipo_id: 20,
+              user_id: 1,
+              fecha: '2026-08-11',
+              hora_inicio: '10:00:00',
+              hora_fin: '10:30:00',
+              motivo: 'Prestamo de equipo',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/providers/citas/me': () => ({
+      'GET /api/providers/citas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 3,
-            provider_profile_id: 30,
-            user_id: 1,
-            fecha: '2026-08-12',
-            hora_inicio: '11:00:00',
-            hora_fin: '11:30:00',
-            motivo: 'Consulta',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 3,
+              provider_profile_id: 30,
+              user_id: 1,
+              fecha: '2026-08-12',
+              hora_inicio: '11:00:00',
+              hora_fin: '11:30:00',
+              motivo: 'Consulta',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
     });
 
@@ -127,31 +145,37 @@ describe('MisReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas/me': () => ({
+      'GET /api/resources/salas/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 1,
-            sala_id: 10,
-            user_id: 1,
-            fecha: '2026-08-10',
-            hora_inicio: '09:00:00',
-            hora_fin: '09:30:00',
-            motivo: 'Reunion de sala',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 1,
+              sala_id: 10,
+              user_id: 1,
+              fecha: '2026-08-10',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion de sala',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/resources/equipos/reservas/me': () => ({
+      'GET /api/resources/equipos/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/providers/citas/me': () => ({
+      'GET /api/providers/citas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
       'PATCH /api/resources/salas/reservas/1/cancel': () => ({
         ok: true,
@@ -191,20 +215,20 @@ describe('MisReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas/me': () => ({
+      'GET /api/resources/salas/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/resources/equipos/reservas/me': () => ({
+      'GET /api/resources/equipos/reservas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/providers/citas/me': () => ({
+      'GET /api/providers/citas/me?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
     });
 
@@ -213,5 +237,91 @@ describe('MisReservasPage', () => {
     expect(await screen.findByText('No tienes reservas de salas.')).toBeInTheDocument();
     expect(screen.getByText('No tienes reservas de equipos.')).toBeInTheDocument();
     expect(screen.getByText('No tienes citas.')).toBeInTheDocument();
+  });
+
+  it('mis_reservas_salas_pagination_next_button_fetches_next_page', async () => {
+    mockFetchRoutes({
+      'GET /api/auth/me': () => ({
+        ok: true,
+        status: 200,
+        json: async () => CLIENT_USER,
+      }),
+      'GET /api/notifications/me/unread-count': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ count: 0 }),
+      }),
+      'GET /api/resources/salas/reservas/me?page=1&page_size=20': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          items: [
+            {
+              id: 1,
+              sala_id: 10,
+              user_id: 1,
+              fecha: '2026-08-10',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion de sala',
+              estado: 'confirmada',
+            },
+          ],
+          total: 21,
+          page: 1,
+          page_size: 20,
+          total_pages: 2,
+        }),
+      }),
+      'GET /api/resources/salas/reservas/me?page=2&page_size=20': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          items: [
+            {
+              id: 21,
+              sala_id: 10,
+              user_id: 1,
+              fecha: '2026-08-20',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion pagina dos',
+              estado: 'confirmada',
+            },
+          ],
+          total: 21,
+          page: 2,
+          page_size: 20,
+          total_pages: 2,
+        }),
+      }),
+      'GET /api/resources/equipos/reservas/me?page=1&page_size=20': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
+      }),
+      'GET /api/providers/citas/me?page=1&page_size=20': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
+      }),
+    });
+
+    const user = userEvent.setup();
+    renderPage();
+
+    await screen.findByText('Reunion de sala');
+
+    const siguienteButtons = screen.getAllByRole('button', { name: /siguiente/i });
+    await user.click(siguienteButtons[0]);
+
+    expect(
+      fetch.mock.calls.some(
+        ([url]) =>
+          typeof url === 'string' &&
+          url.includes('salas/reservas/me') &&
+          url.includes('page=2')
+      )
+    ).toBe(true);
   });
 });

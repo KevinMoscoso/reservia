@@ -24,7 +24,7 @@ function NotificationBell() {
     const nextIsOpen = !isOpen;
     setIsOpen(nextIsOpen);
     if (nextIsOpen) {
-      listMyNotifications().then((data) => setNotifications(data));
+      listMyNotifications().then((data) => setNotifications(data.items));
     }
   }
 

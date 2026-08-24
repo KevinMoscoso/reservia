@@ -1,7 +1,7 @@
 import { apiFetch } from './client';
 
-function listMyNotifications() {
-  return apiFetch('/notifications/me');
+function listMyNotifications(page = 1, pageSize = 20) {
+  return apiFetch(`/notifications/me?page=${page}&page_size=${pageSize}`);
 }
 function getUnreadCount() {
   return apiFetch('/notifications/me/unread-count');

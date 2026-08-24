@@ -58,62 +58,80 @@ describe('AdminReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas': () => ({
+      'GET /api/resources/salas/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 1,
-            sala_id: 10,
-            sala_nombre: 'Sala A',
-            user_id: 2,
-            user_full_name: 'Cliente A',
-            user_email: 'clientea@example.com',
-            fecha: '2026-08-10',
-            hora_inicio: '09:00:00',
-            hora_fin: '09:30:00',
-            motivo: 'Reunion',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 1,
+              sala_id: 10,
+              sala_nombre: 'Sala A',
+              user_id: 2,
+              user_full_name: 'Cliente A',
+              user_email: 'clientea@example.com',
+              fecha: '2026-08-10',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/resources/equipos/reservas': () => ({
+      'GET /api/resources/equipos/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 2,
-            equipo_id: 20,
-            equipo_nombre: 'Proyector',
-            user_id: 3,
-            user_full_name: 'Cliente B',
-            user_email: 'clienteb@example.com',
-            fecha: '2026-08-11',
-            hora_inicio: '10:00:00',
-            hora_fin: '10:30:00',
-            motivo: 'Prestamo',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 2,
+              equipo_id: 20,
+              equipo_nombre: 'Proyector',
+              user_id: 3,
+              user_full_name: 'Cliente B',
+              user_email: 'clienteb@example.com',
+              fecha: '2026-08-11',
+              hora_inicio: '10:00:00',
+              hora_fin: '10:30:00',
+              motivo: 'Prestamo',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/providers/citas': () => ({
+      'GET /api/providers/citas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 3,
-            provider_profile_id: 30,
-            provider_full_name: 'Proveedor Uno',
-            user_id: 4,
-            user_full_name: 'Cliente C',
-            user_email: 'clientec@example.com',
-            fecha: '2026-08-12',
-            hora_inicio: '11:00:00',
-            hora_fin: '11:30:00',
-            motivo: 'Consulta',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 3,
+              provider_profile_id: 30,
+              provider_full_name: 'Proveedor Uno',
+              user_id: 4,
+              user_full_name: 'Cliente C',
+              user_email: 'clientec@example.com',
+              fecha: '2026-08-12',
+              hora_inicio: '11:00:00',
+              hora_fin: '11:30:00',
+              motivo: 'Consulta',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
     });
 
@@ -138,34 +156,40 @@ describe('AdminReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas': () => ({
+      'GET /api/resources/salas/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 1,
-            sala_id: 10,
-            sala_nombre: 'Sala A',
-            user_id: 2,
-            user_full_name: 'Cliente A',
-            user_email: 'clientea@example.com',
-            fecha: '2026-08-10',
-            hora_inicio: '09:00:00',
-            hora_fin: '09:30:00',
-            motivo: 'Reunion',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 1,
+              sala_id: 10,
+              sala_nombre: 'Sala A',
+              user_id: 2,
+              user_full_name: 'Cliente A',
+              user_email: 'clientea@example.com',
+              fecha: '2026-08-10',
+              hora_inicio: '09:00:00',
+              hora_fin: '09:30:00',
+              motivo: 'Reunion',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
-      'GET /api/resources/equipos/reservas': () => ({
+      'GET /api/resources/equipos/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/providers/citas': () => ({
+      'GET /api/providers/citas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
       'PATCH /api/resources/salas/reservas/1/cancel': () => ({
         ok: true,
@@ -208,34 +232,40 @@ describe('AdminReservasPage', () => {
         status: 200,
         json: async () => ({ count: 0 }),
       }),
-      'GET /api/resources/salas/reservas': () => ({
+      'GET /api/resources/salas/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/resources/equipos/reservas': () => ({
+      'GET /api/resources/equipos/reservas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [],
+        json: async () => ({ items: [], total: 0, page: 1, page_size: 20, total_pages: 1 }),
       }),
-      'GET /api/providers/citas': () => ({
+      'GET /api/providers/citas?page=1&page_size=20': () => ({
         ok: true,
         status: 200,
-        json: async () => [
-          {
-            id: 3,
-            provider_profile_id: 30,
-            provider_full_name: 'Proveedor Uno',
-            user_id: 4,
-            user_full_name: 'Cliente C',
-            user_email: 'clientec@example.com',
-            fecha: '2026-08-12',
-            hora_inicio: '11:00:00',
-            hora_fin: '11:30:00',
-            motivo: 'Consulta',
-            estado: 'confirmada',
-          },
-        ],
+        json: async () => ({
+          items: [
+            {
+              id: 3,
+              provider_profile_id: 30,
+              provider_full_name: 'Proveedor Uno',
+              user_id: 4,
+              user_full_name: 'Cliente C',
+              user_email: 'clientec@example.com',
+              fecha: '2026-08-12',
+              hora_inicio: '11:00:00',
+              hora_fin: '11:30:00',
+              motivo: 'Consulta',
+              estado: 'confirmada',
+            },
+          ],
+          total: 1,
+          page: 1,
+          page_size: 20,
+          total_pages: 1,
+        }),
       }),
     });
 
