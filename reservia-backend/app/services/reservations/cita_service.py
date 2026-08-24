@@ -1,3 +1,4 @@
+import math
 from datetime import date, datetime
 
 from app.core import config
@@ -170,28 +171,26 @@ def create_cita(
     return cita
 
 
-def list_my_citas(db, user_id: int) -> list[Cita]:
-    return cita_repository.list_by_user(db, user_id)
+def list_my_citas(db, user_id: int, page: int, page_size: int) -> dict:
+    items, total = cita_repository.list_by_user_paginated(db, user_id, page, page_size)
+    total_pages = math.ceil(total / page_size) if page_size else 0
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "total_pages": total_pages}
 
 
-def list_all_reservas(db) -> list[dict]:
-    rows = cita_repository.list_all_with_details(db)
-    return [
+def list_all_reservas(db, page: int, page_size: int) -> dict:
+    rows, total = cita_repository.list_all_with_details_paginated(db, page, page_size)
+    items = [
         {
-            "id": cita.id,
-            "provider_profile_id": cita.provider_profile_id,
+            "id": cita.id, "provider_profile_id": cita.provider_profile_id,
             "provider_full_name": provider_full_name,
-            "user_id": cita.user_id,
-            "user_full_name": client_full_name,
-            "user_email": client_email,
-            "fecha": cita.fecha,
-            "hora_inicio": cita.hora_inicio,
-            "hora_fin": cita.hora_fin,
-            "motivo": cita.motivo,
-            "estado": cita.estado,
+            "user_id": cita.user_id, "user_full_name": client_full_name, "user_email": client_email,
+            "fecha": cita.fecha, "hora_inicio": cita.hora_inicio, "hora_fin": cita.hora_fin,
+            "motivo": cita.motivo, "estado": cita.estado,
         }
         for cita, provider_full_name, client_full_name, client_email in rows
     ]
+    total_pages = math.ceil(total / page_size) if page_size else 0
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "total_pages": total_pages}
 
 
 def cancel_cita(db, cita_id: int, actor_user: User) -> Cita:

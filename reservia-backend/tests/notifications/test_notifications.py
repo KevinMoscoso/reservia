@@ -76,9 +76,10 @@ def test_notification_created_on_reserva_sala_creation(client):
     notif_response = client.get("/api/notifications/me")
     assert notif_response.status_code == 200
     body = notif_response.json()
-    assert len(body) == 1
-    assert body[0]["tipo"] == "reserva_confirmada"
-    assert "Sala Notif Uno" in body[0]["mensaje"]
+    assert body["total"] == 1
+    assert len(body["items"]) == 1
+    assert body["items"][0]["tipo"] == "reserva_confirmada"
+    assert "Sala Notif Uno" in body["items"][0]["mensaje"]
 
 
 def test_notification_created_on_cita_creation_for_both_client_and_provider(client):
@@ -110,7 +111,7 @@ def test_notification_created_on_cita_creation_for_both_client_and_provider(clie
     assert create_response.status_code == 201
 
     client_notif_response = client.get("/api/notifications/me")
-    client_notifs = client_notif_response.json()
+    client_notifs = client_notif_response.json()["items"]
     assert len(client_notifs) == 1
     assert client_notifs[0]["tipo"] == "cita_confirmada"
 
@@ -118,7 +119,7 @@ def test_notification_created_on_cita_creation_for_both_client_and_provider(clie
     _login_as(client, "provider_notif_cita@example.com")
 
     provider_notif_response = client.get("/api/notifications/me")
-    provider_notifs = provider_notif_response.json()
+    provider_notifs = provider_notif_response.json()["items"]
     assert len(provider_notifs) == 1
     assert provider_notifs[0]["tipo"] == "cita_confirmada"
 
@@ -152,7 +153,7 @@ def test_list_my_notifications_returns_only_own(client):
     )
 
     response = client.get("/api/notifications/me")
-    body = response.json()
+    body = response.json()["items"]
     assert len(body) == 1
     assert "Reunion Dos" not in str(body)
 
@@ -197,7 +198,7 @@ def test_mark_notification_as_read(client):
     )
 
     list_response = client.get("/api/notifications/me")
-    notif_id = list_response.json()[0]["id"]
+    notif_id = list_response.json()["items"][0]["id"]
 
     read_response = client.patch(f"/api/notifications/{notif_id}/read")
     assert read_response.status_code == 200
@@ -225,7 +226,7 @@ def test_cannot_mark_other_users_notification_as_read(client):
     )
 
     list_response = client.get("/api/notifications/me")
-    notif_id = list_response.json()[0]["id"]
+    notif_id = list_response.json()["items"][0]["id"]
 
     client.cookies.clear()
     _register_client_user(client, "cliente_intruso_notif@example.com")

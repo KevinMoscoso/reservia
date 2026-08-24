@@ -58,26 +58,31 @@ def list_confirmadas_by_provider_fecha(
     )
 
 
-def list_by_user(db: DBSession, user_id: int) -> list[Cita]:
-    return db.query(Cita).filter(Cita.user_id == user_id).all()
+def list_by_user_paginated(db: DBSession, user_id: int, page: int, page_size: int):
+    query = (
+        db.query(Cita)
+        .filter(Cita.user_id == user_id)
+        .order_by(Cita.fecha.desc())
+    )
+    total = query.count()
+    items = query.offset((page - 1) * page_size).limit(page_size).all()
+    return items, total
 
 
-def list_all_with_details(db: DBSession) -> list[tuple[Cita, str, str, str]]:
-    """
-    Retorna tuplas (cita, provider_full_name, client_full_name, client_email).
-    """
+def list_all_with_details_paginated(db: DBSession, page: int, page_size: int):
     ProviderUser = aliased(User)
     ClientUser = aliased(User)
 
-    results = (
+    base_query = (
         db.query(Cita, ProviderUser.full_name, ClientUser.full_name, ClientUser.email)
         .join(ProviderProfile, Cita.provider_profile_id == ProviderProfile.id)
         .join(ProviderUser, ProviderProfile.user_id == ProviderUser.id)
         .join(ClientUser, Cita.user_id == ClientUser.id)
         .order_by(Cita.fecha.desc())
-        .all()
     )
-    return results
+    total = base_query.count()
+    items = base_query.offset((page - 1) * page_size).limit(page_size).all()
+    return items, total
 
 
 def list_by_fecha_range(

@@ -57,23 +57,27 @@ def list_confirmadas_by_sala_fecha(
     )
 
 
-def list_by_user(db: DBSession, user_id: int) -> list[ReservaSala]:
-    return db.query(ReservaSala).filter(ReservaSala.user_id == user_id).all()
+def list_by_user_paginated(db: DBSession, user_id: int, page: int, page_size: int):
+    query = (
+        db.query(ReservaSala)
+        .filter(ReservaSala.user_id == user_id)
+        .order_by(ReservaSala.fecha.desc())
+    )
+    total = query.count()
+    items = query.offset((page - 1) * page_size).limit(page_size).all()
+    return items, total
 
 
-def list_all_with_details(db: DBSession) -> list[tuple[ReservaSala, str, str, str]]:
-    """
-    Retorna tuplas (reserva, sala_nombre, user_full_name, user_email),
-    ordenadas por fecha descendente.
-    """
-    results = (
+def list_all_with_details_paginated(db: DBSession, page: int, page_size: int):
+    base_query = (
         db.query(ReservaSala, Sala.nombre, User.full_name, User.email)
         .join(Sala, ReservaSala.sala_id == Sala.id)
         .join(User, ReservaSala.user_id == User.id)
         .order_by(ReservaSala.fecha.desc())
-        .all()
     )
-    return results
+    total = base_query.count()
+    items = base_query.offset((page - 1) * page_size).limit(page_size).all()
+    return items, total
 
 
 def list_confirmadas_by_fecha_range(

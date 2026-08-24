@@ -20,3 +20,11 @@ class NotificacionResponse(BaseModel):
 
 class UnreadCountResponse(BaseModel):
     count: int
+
+
+class NotificacionPageResponse(BaseModel):
+    items: list[NotificacionResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int

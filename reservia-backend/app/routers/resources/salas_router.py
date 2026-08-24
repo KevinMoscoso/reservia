@@ -7,9 +7,10 @@ from app.core.database import get_db
 from app.middlewares.auth_middleware import get_current_user_dep, require_role
 from app.models.auth.user import User, UserRole
 from app.schemas.reservations.reserva import (
-    AdminReservaSalaResponse,
+    AdminReservaSalaPageResponse,
     AvailabilityBlockResponse,
     BookingCreateRequest,
+    ReservaSalaPageResponse,
     ReservaSalaResponse,
 )
 from app.schemas.resources.sala import SalaCreateRequest, SalaResponse, SalaUpdateRequest
@@ -36,20 +37,24 @@ def list_salas(
     return sala_service.list_salas(db)
 
 
-@router.get("/reservas/me", response_model=list[ReservaSalaResponse])
+@router.get("/reservas/me", response_model=ReservaSalaPageResponse)
 def list_my_reservas_salas(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(get_current_user_dep),
 ):
-    return reserva_sala_service.list_my_reservas(db, current_user.id)
+    return reserva_sala_service.list_my_reservas(db, current_user.id, page, page_size)
 
 
-@router.get("/reservas", response_model=list[AdminReservaSalaResponse])
+@router.get("/reservas", response_model=AdminReservaSalaPageResponse)
 def list_all_reservas_salas(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.admin.value)),
 ):
-    return reserva_sala_service.list_all_reservas(db)
+    return reserva_sala_service.list_all_reservas(db, page, page_size)
 
 
 @router.patch("/reservas/{reserva_id}/cancel", response_model=ReservaSalaResponse)

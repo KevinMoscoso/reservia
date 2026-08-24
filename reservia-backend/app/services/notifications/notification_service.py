@@ -1,3 +1,4 @@
+import math
 from typing import Optional
 
 from app.models.notifications.notificacion import Notificacion
@@ -23,8 +24,10 @@ def create_notification(
     return notification_repository.create(db, user_id, tipo, mensaje, entity_type, entity_id)
 
 
-def list_my_notifications(db, user_id: int) -> list[Notificacion]:
-    return notification_repository.list_by_user(db, user_id)
+def list_my_notifications(db, user_id: int, page: int, page_size: int) -> dict:
+    items, total = notification_repository.list_by_user_paginated(db, user_id, page, page_size)
+    total_pages = math.ceil(total / page_size) if page_size else 0
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "total_pages": total_pages}
 
 
 def get_unread_count(db, user_id: int) -> int:

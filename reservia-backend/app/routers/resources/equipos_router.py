@@ -7,9 +7,10 @@ from app.core.database import get_db
 from app.middlewares.auth_middleware import get_current_user_dep, require_role
 from app.models.auth.user import User, UserRole
 from app.schemas.reservations.reserva import (
-    AdminReservaEquipoResponse,
+    AdminReservaEquipoPageResponse,
     AvailabilityBlockResponse,
     BookingCreateRequest,
+    ReservaEquipoPageResponse,
     ReservaEquipoResponse,
 )
 from app.schemas.resources.equipo import (
@@ -43,20 +44,24 @@ def list_equipos(
     return equipo_service.list_equipos(db)
 
 
-@router.get("/reservas/me", response_model=list[ReservaEquipoResponse])
+@router.get("/reservas/me", response_model=ReservaEquipoPageResponse)
 def list_my_reservas_equipos(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(get_current_user_dep),
 ):
-    return reserva_equipo_service.list_my_reservas(db, current_user.id)
+    return reserva_equipo_service.list_my_reservas(db, current_user.id, page, page_size)
 
 
-@router.get("/reservas", response_model=list[AdminReservaEquipoResponse])
+@router.get("/reservas", response_model=AdminReservaEquipoPageResponse)
 def list_all_reservas_equipos(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.admin.value)),
 ):
-    return reserva_equipo_service.list_all_reservas(db)
+    return reserva_equipo_service.list_all_reservas(db, page, page_size)
 
 
 @router.patch("/reservas/{reserva_id}/cancel", response_model=ReservaEquipoResponse)

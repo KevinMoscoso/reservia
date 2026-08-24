@@ -88,12 +88,13 @@ def test_admin_lists_all_reservas_salas(client):
     response = client.get("/api/resources/salas/reservas")
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 2
+    assert body["total"] == 2
+    assert len(body["items"]) == 2
 
-    nombres_sala = {item["sala_nombre"] for item in body}
+    nombres_sala = {item["sala_nombre"] for item in body["items"]}
     assert nombres_sala == {"Sala Admin View"}
 
-    usuarios = {item["user_full_name"] for item in body}
+    usuarios = {item["user_full_name"] for item in body["items"]}
     assert usuarios == {"Cliente Uno View", "Cliente Dos View"}
 
 
@@ -119,7 +120,7 @@ def test_admin_can_cancel_any_reserva_sala(client):
 
     list_response = client.get("/api/resources/salas/reservas")
     assert list_response.status_code == 200
-    item = next(i for i in list_response.json() if i["id"] == reserva_id)
+    item = next(i for i in list_response.json()["items"] if i["id"] == reserva_id)
     assert item["estado"] == "cancelada"
 
 
@@ -148,9 +149,10 @@ def test_admin_lists_all_reservas_equipos(client):
     response = client.get("/api/resources/equipos/reservas")
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 1
-    assert body[0]["equipo_nombre"] == "Equipo Admin View"
-    assert body[0]["user_full_name"] == "Cliente Equipo View"
+    assert body["total"] == 1
+    assert len(body["items"]) == 1
+    assert body["items"][0]["equipo_nombre"] == "Equipo Admin View"
+    assert body["items"][0]["user_full_name"] == "Cliente Equipo View"
 
 
 def test_admin_lists_all_citas(client):
@@ -180,9 +182,10 @@ def test_admin_lists_all_citas(client):
     response = client.get("/api/providers/citas")
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 1
-    assert body[0]["provider_full_name"] == "Proveedor Admin View"
-    assert body[0]["user_full_name"] == "Cliente Cita View"
+    assert body["total"] == 1
+    assert len(body["items"]) == 1
+    assert body["items"][0]["provider_full_name"] == "Proveedor Admin View"
+    assert body["items"][0]["user_full_name"] == "Cliente Cita View"
 
 
 def test_non_admin_forbidden_from_listing_all_citas(client):

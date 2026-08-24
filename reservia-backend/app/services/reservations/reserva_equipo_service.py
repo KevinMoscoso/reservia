@@ -1,3 +1,4 @@
+import math
 from datetime import date, datetime
 
 from app.core import config
@@ -145,28 +146,25 @@ def create_reserva(
     return reserva
 
 
-def list_my_reservas(db, user_id: int) -> list[ReservaEquipo]:
-    return reserva_equipo_repository.list_by_user(db, user_id)
+def list_my_reservas(db, user_id: int, page: int, page_size: int) -> dict:
+    items, total = reserva_equipo_repository.list_by_user_paginated(db, user_id, page, page_size)
+    total_pages = math.ceil(total / page_size) if page_size else 0
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "total_pages": total_pages}
 
 
-def list_all_reservas(db) -> list[dict]:
-    rows = reserva_equipo_repository.list_all_with_details(db)
-    return [
+def list_all_reservas(db, page: int, page_size: int) -> dict:
+    rows, total = reserva_equipo_repository.list_all_with_details_paginated(db, page, page_size)
+    items = [
         {
-            "id": reserva.id,
-            "equipo_id": reserva.equipo_id,
-            "equipo_nombre": equipo_nombre,
-            "user_id": reserva.user_id,
-            "user_full_name": user_full_name,
-            "user_email": user_email,
-            "fecha": reserva.fecha,
-            "hora_inicio": reserva.hora_inicio,
-            "hora_fin": reserva.hora_fin,
-            "motivo": reserva.motivo,
-            "estado": reserva.estado,
+            "id": reserva.id, "equipo_id": reserva.equipo_id, "equipo_nombre": equipo_nombre,
+            "user_id": reserva.user_id, "user_full_name": user_full_name, "user_email": user_email,
+            "fecha": reserva.fecha, "hora_inicio": reserva.hora_inicio, "hora_fin": reserva.hora_fin,
+            "motivo": reserva.motivo, "estado": reserva.estado,
         }
         for reserva, equipo_nombre, user_full_name, user_email in rows
     ]
+    total_pages = math.ceil(total / page_size) if page_size else 0
+    return {"items": items, "total": total, "page": page, "page_size": page_size, "total_pages": total_pages}
 
 
 def cancel_reserva(db, reserva_id: int, actor_user: User) -> ReservaEquipo:

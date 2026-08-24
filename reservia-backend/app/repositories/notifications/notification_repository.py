@@ -30,13 +30,15 @@ def get_by_id(db: DBSession, id: int) -> Optional[Notificacion]:
     return db.query(Notificacion).filter(Notificacion.id == id).first()
 
 
-def list_by_user(db: DBSession, user_id: int) -> list[Notificacion]:
-    return (
+def list_by_user_paginated(db: DBSession, user_id: int, page: int, page_size: int):
+    query = (
         db.query(Notificacion)
         .filter(Notificacion.user_id == user_id)
         .order_by(Notificacion.created_at.desc())
-        .all()
     )
+    total = query.count()
+    items = query.offset((page - 1) * page_size).limit(page_size).all()
+    return items, total
 
 
 def count_unread_by_user(db: DBSession, user_id: int) -> int:

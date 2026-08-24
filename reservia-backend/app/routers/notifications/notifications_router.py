@@ -1,21 +1,27 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session as DBSession
 
 from app.core.database import get_db
 from app.middlewares.auth_middleware import get_current_user_dep
 from app.models.auth.user import User
-from app.schemas.notifications.notificacion import NotificacionResponse, UnreadCountResponse
+from app.schemas.notifications.notificacion import (
+    NotificacionPageResponse,
+    NotificacionResponse,
+    UnreadCountResponse,
+)
 from app.services.notifications import notification_service
 
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
 
 
-@router.get("/me", response_model=list[NotificacionResponse])
+@router.get("/me", response_model=NotificacionPageResponse)
 def list_my_notifications(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(get_current_user_dep),
 ):
-    return notification_service.list_my_notifications(db, current_user.id)
+    return notification_service.list_my_notifications(db, current_user.id, page, page_size)
 
 
 @router.get("/me/unread-count", response_model=UnreadCountResponse)

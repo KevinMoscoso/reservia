@@ -181,10 +181,6 @@ def test_create_reserva_sala_overlap_rejected(client):
 
 
 def test_create_reserva_sala_concurrent_only_one_succeeds(client, db_session):
-    # NOTA: ver el reporte de entrega — se detecto un problema de
-    # concurrencia real durante el analisis de la implementacion. Este test
-    # se entrega EXACTAMENTE segun el patron especificado, sin debilitar la
-    # aserción ni el mecanismo de bloqueo.
     _setup_admin(client, email="admin_concurrent_sala@example.com")
     sala = _create_sala(client, nombre="Sala Concurrencia")
     sala_id = sala["id"]
@@ -341,5 +337,6 @@ def test_list_my_reservas_salas_returns_only_own(client):
     response = client.get("/api/resources/salas/reservas/me")
     assert response.status_code == 200
     body = response.json()
-    assert len(body) == 1
-    assert body[0]["motivo"] == "Reunion Dos"
+    assert body["total"] == 1
+    assert len(body["items"]) == 1
+    assert body["items"][0]["motivo"] == "Reunion Dos"

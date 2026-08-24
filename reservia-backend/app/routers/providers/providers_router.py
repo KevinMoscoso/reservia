@@ -14,9 +14,10 @@ from app.schemas.providers.provider import (
     ScheduleBlockResponse,
 )
 from app.schemas.reservations.reserva import (
-    AdminCitaResponse,
+    AdminCitaPageResponse,
     AvailabilityBlockResponse,
     BookingCreateRequest,
+    CitaPageResponse,
     CitaResponse,
 )
 from app.services.providers import provider_service
@@ -97,20 +98,24 @@ def deactivate_my_schedule_block(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
 
 
-@router.get("/citas/me", response_model=list[CitaResponse])
+@router.get("/citas/me", response_model=CitaPageResponse)
 def list_my_citas(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(get_current_user_dep),
 ):
-    return cita_service.list_my_citas(db, current_user.id)
+    return cita_service.list_my_citas(db, current_user.id, page, page_size)
 
 
-@router.get("/citas", response_model=list[AdminCitaResponse])
+@router.get("/citas", response_model=AdminCitaPageResponse)
 def list_all_citas(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: DBSession = Depends(get_db),
     current_user: User = Depends(require_role(UserRole.admin.value)),
 ):
-    return cita_service.list_all_reservas(db)
+    return cita_service.list_all_reservas(db, page, page_size)
 
 
 @router.patch("/citas/{cita_id}/cancel", response_model=CitaResponse)

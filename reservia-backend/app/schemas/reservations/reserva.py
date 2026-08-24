@@ -110,3 +110,51 @@ class AdminCitaResponse(BaseModel):
     estado: EstadoReserva
 
     model_config = {"from_attributes": True}
+
+
+class ReservaSalaPageResponse(BaseModel):
+    items: list[ReservaSalaResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class ReservaEquipoPageResponse(BaseModel):
+    items: list[ReservaEquipoResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class CitaPageResponse(BaseModel):
+    items: list[CitaResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class AdminReservaSalaPageResponse(BaseModel):
+    items: list[AdminReservaSalaResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class AdminReservaEquipoPageResponse(BaseModel):
+    items: list[AdminReservaEquipoResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+
+
+class AdminCitaPageResponse(BaseModel):
+    items: list[AdminCitaResponse]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
