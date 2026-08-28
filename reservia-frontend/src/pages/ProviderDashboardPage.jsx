@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import {
+  addDateBlock,
   addScheduleBlock,
+  deactivateDateBlock,
   deactivateScheduleBlock,
+  getMyDateBlocks,
   getMyProfile,
   getMySchedule,
   updateMyProfile,
@@ -16,10 +19,15 @@ function isSlotDurationValid(value) {
   return Number.isInteger(num) && num >= 5 && num <= 480;
 }
 
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 function ProviderDashboardPage() {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState([]);
+  const [dateBlocks, setDateBlocks] = useState([]);
 
   const [slotDuration, setSlotDuration] = useState('');
   const [profileError, setProfileError] = useState('');
@@ -30,11 +38,16 @@ function ProviderDashboardPage() {
   const [endTime, setEndTime] = useState('');
   const [scheduleError, setScheduleError] = useState('');
 
+  const [fechaBloqueo, setFechaBloqueo] = useState(todayISO());
+  const [motivoBloqueo, setMotivoBloqueo] = useState('');
+  const [dateBlockError, setDateBlockError] = useState('');
+
   useEffect(() => {
-    Promise.all([getMyProfile(), getMySchedule()])
-      .then(([profileData, scheduleData]) => {
+    Promise.all([getMyProfile(), getMySchedule(), getMyDateBlocks()])
+      .then(([profileData, scheduleData, dateBlocksData]) => {
         setSlotDuration(String(profileData.slot_duration_minutes));
         setSchedule(scheduleData);
+        setDateBlocks(dateBlocksData);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -88,6 +101,28 @@ function ProviderDashboardPage() {
     setSchedule((prev) => prev.map((block) => (block.id === id ? actualizado : block)));
   }
 
+  async function handleAddDateBlock(event) {
+    event.preventDefault();
+    setDateBlockError('');
+
+    try {
+      const nuevoBloqueo = await addDateBlock({
+        fecha: fechaBloqueo,
+        motivo: motivoBloqueo || null,
+      });
+      setDateBlocks((prev) => [nuevoBloqueo, ...prev]);
+      setFechaBloqueo(todayISO());
+      setMotivoBloqueo('');
+    } catch (err) {
+      setDateBlockError(err.message);
+    }
+  }
+
+  async function handleDeactivateDateBlock(id) {
+    const actualizado = await deactivateDateBlock(id);
+    setDateBlocks((prev) => prev.map((block) => (block.id === id ? actualizado : block)));
+  }
+
   if (loading) {
     return (
       <Layout>
@@ -130,7 +165,7 @@ function ProviderDashboardPage() {
         </form>
       </section>
 
-      <section>
+      <section className="mb-8">
         <h2 className="mb-2 text-lg font-semibold text-gray-800">Horario semanal</h2>
 
         {DAY_ORDER.map((dayKey) => {
@@ -226,6 +261,76 @@ function ProviderDashboardPage() {
             className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
           >
             Agregar bloque
+          </button>
+        </form>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="mb-2 text-lg font-semibold text-gray-800">Fechas bloqueadas</h2>
+
+        {dateBlocks.length === 0 && (
+          <p className="text-sm text-gray-400">No tienes fechas bloqueadas.</p>
+        )}
+
+        <ul className="flex flex-col gap-2">
+          {dateBlocks.map((block) => {
+            const isActive = block.estado === 'active';
+            return (
+              <li
+                key={block.id}
+                className={`flex items-center gap-3 text-sm ${!isActive ? 'text-gray-400' : ''}`}
+              >
+                <span>{block.fecha}</span>
+                <span>{block.motivo || 'Sin motivo especificado'}</span>
+                <span>{block.estado}</span>
+                {isActive && (
+                  <button
+                    onClick={() => handleDeactivateDateBlock(block.id)}
+                    className="rounded bg-red-600 px-2 py-1 text-xs text-white"
+                  >
+                    Desbloquear
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <form onSubmit={handleAddDateBlock} className="mt-4 flex flex-wrap items-end gap-3">
+          {dateBlockError && <p className="w-full text-sm text-red-600">{dateBlockError}</p>}
+
+          <div>
+            <label htmlFor="fecha_bloqueo" className="mb-1 block text-sm text-gray-700">
+              Fecha
+            </label>
+            <input
+              id="fecha_bloqueo"
+              type="date"
+              min={todayISO()}
+              value={fechaBloqueo}
+              onChange={(e) => setFechaBloqueo(e.target.value)}
+              className="rounded border border-gray-300 px-3 py-2"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="motivo_bloqueo" className="mb-1 block text-sm text-gray-700">
+              Motivo (opcional)
+            </label>
+            <input
+              id="motivo_bloqueo"
+              type="text"
+              value={motivoBloqueo}
+              onChange={(e) => setMotivoBloqueo(e.target.value)}
+              className="rounded border border-gray-300 px-3 py-2"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          >
+            Bloquear fecha
           </button>
         </form>
       </section>

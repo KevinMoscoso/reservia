@@ -6,7 +6,7 @@ from app.models.auth.user import User, UserRole
 from app.models.reservations.cita import Cita
 from app.models.reservations.reserva_sala import EstadoReserva
 from app.repositories.auth import user_repository
-from app.repositories.providers import provider_repository
+from app.repositories.providers import provider_date_block_repository, provider_repository
 from app.repositories.reservations import cita_repository
 from app.repositories.shared import audit_repository
 from app.schemas.reservations.reserva import BookingCreateRequest
@@ -57,6 +57,10 @@ class NotOwnerOrProviderError(Exception):
     pass
 
 
+class DateBlockedError(Exception):
+    pass
+
+
 def _blocks_overlap(start_a, end_a, start_b, end_b) -> bool:
     return start_a < end_b and start_b < end_a
 
@@ -65,6 +69,12 @@ def get_availability(db, provider_profile_id: int, fecha: date) -> list[dict]:
     profile = provider_repository.get_profile_by_id(db, provider_profile_id)
     if profile is None:
         raise ProviderProfileNotFoundError("perfil de proveedor no encontrado")
+
+    blocked = provider_date_block_repository.get_active_by_provider_and_fecha(
+        db, provider_profile_id, fecha
+    )
+    if blocked is not None:
+        return []
 
     day_key = DAY_OF_WEEK_BY_INDEX[fecha.weekday()]
     blocks = provider_repository.list_schedule_by_profile(
@@ -91,6 +101,12 @@ def create_cita(
     profile = provider_repository.get_profile_by_id_for_update(db, provider_profile_id)
     if profile is None:
         raise ProviderProfileNotFoundError("perfil de proveedor no encontrado")
+
+    blocked = provider_date_block_repository.get_active_by_provider_and_fecha(
+        db, provider_profile_id, data.fecha
+    )
+    if blocked is not None:
+        raise DateBlockedError("el proveedor no esta disponible en esa fecha")
 
     if data.fecha < date.today():
         raise InvalidDateError("la fecha no puede ser anterior a hoy")

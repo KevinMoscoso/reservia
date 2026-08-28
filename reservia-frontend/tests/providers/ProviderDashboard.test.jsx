@@ -41,6 +41,22 @@ function renderProviderDashboard() {
   );
 }
 
+const UNREAD_COUNT_MOCK = {
+  'GET /api/notifications/me/unread-count': () => ({
+    ok: true,
+    status: 200,
+    json: async () => ({ count: 0 }),
+  }),
+};
+
+const EMPTY_DATE_BLOCKS_MOCK = {
+  'GET /api/providers/me/date-blocks': () => ({
+    ok: true,
+    status: 200,
+    json: async () => [],
+  }),
+};
+
 describe('ProviderDashboardPage', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
@@ -53,11 +69,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
-      'GET /api/notifications/me/unread-count': () => ({
-        ok: true,
-        status: 200,
-        json: async () => ({ count: 0 }),
-      }),
+      ...UNREAD_COUNT_MOCK,
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -77,6 +89,7 @@ describe('ProviderDashboardPage', () => {
           },
         ],
       }),
+      ...EMPTY_DATE_BLOCKS_MOCK,
     });
 
     renderProviderDashboard();
@@ -92,11 +105,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
-      'GET /api/notifications/me/unread-count': () => ({
-        ok: true,
-        status: 200,
-        json: async () => ({ count: 0 }),
-      }),
+      ...UNREAD_COUNT_MOCK,
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -107,6 +116,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => [],
       }),
+      ...EMPTY_DATE_BLOCKS_MOCK,
       'PUT /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -133,11 +143,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
-      'GET /api/notifications/me/unread-count': () => ({
-        ok: true,
-        status: 200,
-        json: async () => ({ count: 0 }),
-      }),
+      ...UNREAD_COUNT_MOCK,
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -148,6 +154,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => [],
       }),
+      ...EMPTY_DATE_BLOCKS_MOCK,
       'POST /api/providers/me/schedule': () => ({
         ok: true,
         status: 201,
@@ -182,11 +189,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
-      'GET /api/notifications/me/unread-count': () => ({
-        ok: true,
-        status: 200,
-        json: async () => ({ count: 0 }),
-      }),
+      ...UNREAD_COUNT_MOCK,
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -197,6 +200,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => [],
       }),
+      ...EMPTY_DATE_BLOCKS_MOCK,
       'POST /api/providers/me/schedule': () => ({
         ok: false,
         status: 409,
@@ -226,11 +230,7 @@ describe('ProviderDashboardPage', () => {
         status: 200,
         json: async () => PROVIDER_USER,
       }),
-      'GET /api/notifications/me/unread-count': () => ({
-        ok: true,
-        status: 200,
-        json: async () => ({ count: 0 }),
-      }),
+      ...UNREAD_COUNT_MOCK,
       'GET /api/providers/me/profile': () => ({
         ok: true,
         status: 200,
@@ -250,6 +250,7 @@ describe('ProviderDashboardPage', () => {
           },
         ],
       }),
+      ...EMPTY_DATE_BLOCKS_MOCK,
       'PATCH /api/providers/me/schedule/3/deactivate': () => ({
         ok: true,
         status: 200,
@@ -272,5 +273,101 @@ describe('ProviderDashboardPage', () => {
 
     expect(await screen.findByText('inactive')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /desactivar/i })).not.toBeInTheDocument();
+  });
+
+  it('provider_dashboard_adds_date_block_success', async () => {
+    mockFetchRoutes({
+      'GET /api/auth/me': () => ({
+        ok: true,
+        status: 200,
+        json: async () => PROVIDER_USER,
+      }),
+      ...UNREAD_COUNT_MOCK,
+      'GET /api/providers/me/profile': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ id: 10, user_id: 5, slot_duration_minutes: 30 }),
+      }),
+      'GET /api/providers/me/schedule': () => ({
+        ok: true,
+        status: 200,
+        json: async () => [],
+      }),
+      'GET /api/providers/me/date-blocks': () => ({
+        ok: true,
+        status: 200,
+        json: async () => [],
+      }),
+      'POST /api/providers/me/date-blocks': () => ({
+        ok: true,
+        status: 201,
+        json: async () => ({
+          id: 1,
+          provider_profile_id: 10,
+          fecha: '2026-09-01',
+          motivo: 'Vacaciones',
+          estado: 'active',
+        }),
+      }),
+    });
+
+    const user = userEvent.setup();
+    renderProviderDashboard();
+
+    await screen.findByRole('button', { name: /bloquear fecha/i });
+
+    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: '2026-09-01' } });
+    await user.type(screen.getByLabelText(/motivo \(opcional\)/i), 'Vacaciones');
+    await user.click(screen.getByRole('button', { name: /bloquear fecha/i }));
+
+    expect(await screen.findByText('2026-09-01')).toBeInTheDocument();
+    expect(screen.getByText('Vacaciones')).toBeInTheDocument();
+  });
+
+  it('provider_dashboard_shows_conflict_error_when_blocking_date_with_citas', async () => {
+    mockFetchRoutes({
+      'GET /api/auth/me': () => ({
+        ok: true,
+        status: 200,
+        json: async () => PROVIDER_USER,
+      }),
+      ...UNREAD_COUNT_MOCK,
+      'GET /api/providers/me/profile': () => ({
+        ok: true,
+        status: 200,
+        json: async () => ({ id: 10, user_id: 5, slot_duration_minutes: 30 }),
+      }),
+      'GET /api/providers/me/schedule': () => ({
+        ok: true,
+        status: 200,
+        json: async () => [],
+      }),
+      'GET /api/providers/me/date-blocks': () => ({
+        ok: true,
+        status: 200,
+        json: async () => [],
+      }),
+      'POST /api/providers/me/date-blocks': () => ({
+        ok: false,
+        status: 409,
+        json: async () => ({
+          detail: 'ya tienes citas confirmadas en esa fecha; cancelalas antes de bloquearla',
+        }),
+      }),
+    });
+
+    const user = userEvent.setup();
+    renderProviderDashboard();
+
+    await screen.findByRole('button', { name: /bloquear fecha/i });
+
+    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: '2026-09-02' } });
+    await user.click(screen.getByRole('button', { name: /bloquear fecha/i }));
+
+    expect(
+      await screen.findByText(
+        'ya tienes citas confirmadas en esa fecha; cancelalas antes de bloquearla'
+      )
+    ).toBeInTheDocument();
   });
 });

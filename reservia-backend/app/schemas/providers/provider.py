@@ -1,7 +1,9 @@
 import datetime
+from typing import Optional
 
 from pydantic import BaseModel, field_validator
 
+from app.models.providers.provider_date_block import DateBlockEstado
 from app.models.providers.provider_schedule import DayOfWeek, ScheduleEstado
 
 VALID_DAYS = {day.value for day in DayOfWeek}
@@ -63,5 +65,28 @@ class ProviderPublicResponse(BaseModel):
     user_id: int
     full_name: str
     slot_duration_minutes: int
+
+    model_config = {"from_attributes": True}
+
+
+class DateBlockCreateRequest(BaseModel):
+    fecha: datetime.date
+    motivo: Optional[str] = None
+
+    @field_validator("fecha")
+    @classmethod
+    def validate_fecha_not_past(cls, value: datetime.date) -> datetime.date:
+        from datetime import date
+        if value < date.today():
+            raise ValueError("La fecha no puede ser anterior a hoy")
+        return value
+
+
+class DateBlockResponse(BaseModel):
+    id: int
+    provider_profile_id: int
+    fecha: datetime.date
+    motivo: Optional[str]
+    estado: DateBlockEstado
 
     model_config = {"from_attributes": True}

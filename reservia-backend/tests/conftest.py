@@ -14,6 +14,7 @@ from app.models.resources.sala import Sala
 from app.models.resources.equipo import Equipo
 from app.models.providers.provider_profile import ProviderProfile
 from app.models.providers.provider_schedule import ProviderSchedule
+from app.models.providers.provider_date_block import ProviderDateBlock
 from app.models.reservations.reserva_sala import ReservaSala
 from app.models.reservations.reserva_equipo import ReservaEquipo
 from app.models.reservations.cita import Cita
@@ -63,6 +64,7 @@ def _clean_all_tables(db_session):
     db_session.query(Cita).delete()
     db_session.query(ReservaEquipo).delete()
     db_session.query(ReservaSala).delete()
+    db_session.query(ProviderDateBlock).delete()
     db_session.query(ProviderSchedule).delete()
     db_session.query(ProviderProfile).delete()
     db_session.query(SessionModel).delete()

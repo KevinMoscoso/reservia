@@ -3,9 +3,11 @@ from datetime import time
 from app.models.auth.user import User
 from app.models.providers.provider_profile import ProviderProfile
 from app.models.providers.provider_schedule import ProviderSchedule, ScheduleEstado
-from app.repositories.providers import provider_repository
+from app.repositories.providers import provider_date_block_repository, provider_repository
+from app.repositories.reservations import cita_repository
 from app.repositories.shared import audit_repository
 from app.schemas.providers.provider import (
+    DateBlockCreateRequest,
     ProviderProfileUpdateRequest,
     ScheduleBlockCreateRequest,
 )
@@ -24,6 +26,18 @@ class ScheduleBlockNotFoundError(Exception):
 
 
 class NotScheduleOwnerError(Exception):
+    pass
+
+
+class DateBlockNotFoundError(Exception):
+    pass
+
+
+class NotDateBlockOwnerError(Exception):
+    pass
+
+
+class ExistingCitasConflictError(Exception):
     pass
 
 
@@ -146,6 +160,54 @@ def deactivate_own_schedule_block(db, user: User, block_id: int) -> ProviderSche
         entity_type="provider_schedule",
         entity_id=block.id,
         metadata=None,
+    )
+
+    return block
+
+
+def list_own_date_blocks(db, user):
+    profile = get_own_profile(db, user)
+    return provider_date_block_repository.list_by_provider(db, profile.id)
+
+
+def add_date_block(db, user, data: DateBlockCreateRequest):
+    profile = get_own_profile(db, user)
+
+    citas_existentes = cita_repository.list_confirmadas_by_provider_fecha(
+        db, profile.id, data.fecha
+    )
+    if citas_existentes:
+        raise ExistingCitasConflictError(
+            "ya tienes citas confirmadas en esa fecha; cancelalas antes de bloquearla"
+        )
+
+    block = provider_date_block_repository.create(db, profile.id, data.fecha, data.motivo)
+
+    audit_repository.log_action(
+        db, actor_user_id=user.id, action="provider.date_block_created",
+        entity_type="provider_date_block", entity_id=block.id, metadata=None,
+    )
+
+    return block
+
+
+def deactivate_own_date_block(db, user, block_id: int):
+    block = provider_date_block_repository.get_by_id(db, block_id)
+    if block is None:
+        raise DateBlockNotFoundError("bloqueo de fecha no encontrado")
+
+    profile = get_own_profile(db, user)
+    if block.provider_profile_id != profile.id:
+        raise NotDateBlockOwnerError("no eres el propietario de este bloqueo")
+
+    if block.estado.value == "inactive":
+        return block
+
+    block = provider_date_block_repository.deactivate(db, block)
+
+    audit_repository.log_action(
+        db, actor_user_id=user.id, action="provider.date_block_deactivated",
+        entity_type="provider_date_block", entity_id=block.id, metadata=None,
     )
 
     return block

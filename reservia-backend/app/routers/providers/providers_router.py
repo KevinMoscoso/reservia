@@ -7,6 +7,8 @@ from app.core.database import get_db
 from app.middlewares.auth_middleware import get_current_user_dep, require_role
 from app.models.auth.user import User, UserRole
 from app.schemas.providers.provider import (
+    DateBlockCreateRequest,
+    DateBlockResponse,
     ProviderProfileResponse,
     ProviderProfileUpdateRequest,
     ProviderPublicResponse,
@@ -98,6 +100,40 @@ def deactivate_my_schedule_block(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
 
 
+@router.get("/me/date-blocks", response_model=list[DateBlockResponse])
+def get_my_date_blocks(
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.provider.value)),
+):
+    return provider_service.list_own_date_blocks(db, current_user)
+
+
+@router.post("/me/date-blocks", response_model=DateBlockResponse, status_code=status.HTTP_201_CREATED)
+def add_my_date_block(
+    data: DateBlockCreateRequest,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.provider.value)),
+):
+    try:
+        return provider_service.add_date_block(db, current_user, data)
+    except provider_service.ExistingCitasConflictError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+
+
+@router.patch("/me/date-blocks/{id}/deactivate", response_model=DateBlockResponse)
+def deactivate_my_date_block(
+    id: int,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(require_role(UserRole.provider.value)),
+):
+    try:
+        return provider_service.deactivate_own_date_block(db, current_user, id)
+    except provider_service.NotDateBlockOwnerError as exc:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+    except provider_service.DateBlockNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+
+
 @router.get("/citas/me", response_model=CitaPageResponse)
 def list_my_citas(
     page: int = Query(1, ge=1),
@@ -164,6 +200,7 @@ def create_cita(
         cita_service.InvalidDateError,
         cita_service.MisalignedTimeError,
         cita_service.OutOfScheduleError,
+        cita_service.DateBlockedError,
     ) as exc:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)

@@ -33,6 +33,15 @@ function cancelCita(id) {
 function listAllCitas(page = 1, pageSize = 20) {
   return apiFetch(`/providers/citas?page=${page}&page_size=${pageSize}`);
 }
+function getMyDateBlocks() {
+  return apiFetch('/providers/me/date-blocks');
+}
+function addDateBlock(payload) {
+  return apiFetch('/providers/me/date-blocks', { method: 'POST', body: JSON.stringify(payload) });
+}
+function deactivateDateBlock(id) {
+  return apiFetch(`/providers/me/date-blocks/${id}/deactivate`, { method: 'PATCH' });
+}
 
 export {
   getMyProfile,
@@ -46,4 +55,7 @@ export {
   listMisCitas,
   cancelCita,
   listAllCitas,
+  getMyDateBlocks,
+  addDateBlock,
+  deactivateDateBlock,
 };
