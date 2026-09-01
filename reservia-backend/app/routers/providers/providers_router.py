@@ -168,6 +168,32 @@ def cancel_cita(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
 
 
+@router.patch("/citas/{cita_id}/reschedule", response_model=CitaResponse)
+def reschedule_cita(
+    cita_id: int,
+    data: BookingCreateRequest,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    try:
+        return cita_service.reschedule_cita(db, cita_id, current_user, data)
+    except cita_service.CitaNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except cita_service.NotOwnerOrProviderError as exc:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+    except cita_service.CannotRescheduleError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+    except cita_service.OverlapError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+    except (
+        cita_service.InvalidDateError,
+        cita_service.MisalignedTimeError,
+        cita_service.OutOfScheduleError,
+        cita_service.DateBlockedError,
+    ) as exc:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc))
+
+
 @router.get("/{provider_profile_id}/availability", response_model=list[AvailabilityBlockResponse])
 def get_provider_availability(
     provider_profile_id: int,

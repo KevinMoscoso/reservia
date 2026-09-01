@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import {
   cancelReservaEquipo,
@@ -15,6 +16,7 @@ function ReservasTable({
   resourceLabel,
   resourceKeyGetter,
   onCancel,
+  onReschedule,
   emptyMessage,
   readOnly,
   page,
@@ -62,12 +64,20 @@ function ReservasTable({
                 {!readOnly && (
                   <td className="py-2">
                     {item.estado === 'confirmada' && (
-                      <button
-                        onClick={() => onCancel(item.id)}
-                        className="rounded bg-red-600 px-2 py-1 text-white"
-                      >
-                        Cancelar
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => onReschedule(item)}
+                          className="rounded bg-blue-600 px-2 py-1 text-white"
+                        >
+                          Reprogramar
+                        </button>
+                        <button
+                          onClick={() => onCancel(item.id)}
+                          className="rounded bg-red-600 px-2 py-1 text-white"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
                     )}
                   </td>
                 )}
@@ -100,6 +110,8 @@ function ReservasTable({
 }
 
 function AdminReservasPage() {
+  const navigate = useNavigate();
+
   const [pageSalas, setPageSalas] = useState(1);
   const [dataSalas, setDataSalas] = useState(EMPTY_PAGE);
   const [loadingSalas, setLoadingSalas] = useState(true);
@@ -134,6 +146,14 @@ function AdminReservasPage() {
     setDataEquipos((prev) => ({ ...prev, items: prev.items.map((r) => (r.id === id ? actualizada : r)) }));
   }
 
+  function handleRescheduleSala(item) {
+    navigate(`/recursos/salas/${item.sala_id}/reservar?reprogramar=${item.id}`);
+  }
+
+  function handleRescheduleEquipo(item) {
+    navigate(`/recursos/equipos/${item.equipo_id}/reservar?reprogramar=${item.id}`);
+  }
+
   if (loadingSalas || loadingEquipos || loadingCitas) {
     return (
       <Layout>
@@ -153,6 +173,7 @@ function AdminReservasPage() {
           resourceLabel="Sala"
           resourceKeyGetter={(item) => item.sala_nombre}
           onCancel={handleCancelSala}
+          onReschedule={handleRescheduleSala}
           emptyMessage="No hay reservas de salas registradas."
           readOnly={false}
           page={dataSalas.page}
@@ -169,6 +190,7 @@ function AdminReservasPage() {
           resourceLabel="Equipo"
           resourceKeyGetter={(item) => item.equipo_nombre}
           onCancel={handleCancelEquipo}
+          onReschedule={handleRescheduleEquipo}
           emptyMessage="No hay reservas de equipos registradas."
           readOnly={false}
           page={dataEquipos.page}
@@ -185,6 +207,7 @@ function AdminReservasPage() {
           resourceLabel="Proveedor"
           resourceKeyGetter={(item) => item.provider_full_name}
           onCancel={undefined}
+          onReschedule={undefined}
           emptyMessage="No hay citas registradas."
           readOnly
           page={dataCitas.page}

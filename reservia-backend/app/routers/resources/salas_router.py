@@ -71,6 +71,32 @@ def cancel_reserva_sala(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
 
 
+@router.patch("/reservas/{reserva_id}/reschedule", response_model=ReservaSalaResponse)
+def reschedule_reserva_sala(
+    reserva_id: int,
+    data: BookingCreateRequest,
+    db: DBSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_dep),
+):
+    try:
+        return reserva_sala_service.reschedule_reserva(db, reserva_id, current_user, data)
+    except reserva_sala_service.ReservaNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
+    except reserva_sala_service.NotOwnerOrAdminError as exc:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+    except reserva_sala_service.CannotRescheduleError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+    except reserva_sala_service.OverlapError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+    except (
+        reserva_sala_service.SalaInactiveError,
+        reserva_sala_service.InvalidDateError,
+        reserva_sala_service.MisalignedTimeError,
+        reserva_sala_service.OutOfHoursError,
+    ) as exc:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc))
+
+
 @router.get("/{id}/availability", response_model=list[AvailabilityBlockResponse])
 def get_sala_availability(
     id: int,

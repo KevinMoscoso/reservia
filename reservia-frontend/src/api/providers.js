@@ -42,6 +42,9 @@ function addDateBlock(payload) {
 function deactivateDateBlock(id) {
   return apiFetch(`/providers/me/date-blocks/${id}/deactivate`, { method: 'PATCH' });
 }
+function rescheduleCita(id, payload) {
+  return apiFetch(`/providers/citas/${id}/reschedule`, { method: 'PATCH', body: JSON.stringify(payload) });
+}
 
 export {
   getMyProfile,
@@ -58,4 +61,5 @@ export {
   getMyDateBlocks,
   addDateBlock,
   deactivateDateBlock,
+  rescheduleCita,
 };

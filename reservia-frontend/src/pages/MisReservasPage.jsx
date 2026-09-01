@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import {
   cancelReservaEquipo,
@@ -10,7 +11,17 @@ import { cancelCita, listMisCitas } from '../api/providers';
 
 const EMPTY_PAGE = { items: [], total: 0, page: 1, page_size: 20, total_pages: 1 };
 
-function ReservationSection({ title, items, page, totalPages, emptyMessage, onCancel, onPrev, onNext }) {
+function ReservationSection({
+  title,
+  items,
+  page,
+  totalPages,
+  emptyMessage,
+  onCancel,
+  onReschedule,
+  onPrev,
+  onNext,
+}) {
   return (
     <section className="mb-8">
       <h2 className="mb-2 text-lg font-semibold text-gray-800">{title}</h2>
@@ -36,12 +47,20 @@ function ReservationSection({ title, items, page, totalPages, emptyMessage, onCa
                     <p>{item.estado}</p>
                   </div>
                   {item.estado === 'confirmada' && (
-                    <button
-                      onClick={() => onCancel(item.id)}
-                      className="rounded bg-red-600 px-3 py-1.5 text-white hover:bg-red-700"
-                    >
-                      Cancelar
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => onReschedule(item)}
+                        className="rounded bg-blue-600 px-3 py-1.5 text-white hover:bg-blue-700"
+                      >
+                        Reprogramar
+                      </button>
+                      <button
+                        onClick={() => onCancel(item.id)}
+                        className="rounded bg-red-600 px-3 py-1.5 text-white hover:bg-red-700"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
                   )}
                 </li>
               );
@@ -73,6 +92,8 @@ function ReservationSection({ title, items, page, totalPages, emptyMessage, onCa
 }
 
 function MisReservasPage() {
+  const navigate = useNavigate();
+
   const [pageSalas, setPageSalas] = useState(1);
   const [dataSalas, setDataSalas] = useState(EMPTY_PAGE);
   const [loadingSalas, setLoadingSalas] = useState(true);
@@ -112,6 +133,18 @@ function MisReservasPage() {
     setDataCitas((prev) => ({ ...prev, items: prev.items.map((c) => (c.id === id ? actualizada : c)) }));
   }
 
+  function handleRescheduleSala(item) {
+    navigate(`/recursos/salas/${item.sala_id}/reservar?reprogramar=${item.id}`);
+  }
+
+  function handleRescheduleEquipo(item) {
+    navigate(`/recursos/equipos/${item.equipo_id}/reservar?reprogramar=${item.id}`);
+  }
+
+  function handleRescheduleCita(item) {
+    navigate(`/proveedores/${item.provider_profile_id}/agendar?reprogramar=${item.id}`);
+  }
+
   if (loadingSalas || loadingEquipos || loadingCitas) {
     return (
       <Layout>
@@ -131,6 +164,7 @@ function MisReservasPage() {
         totalPages={dataSalas.total_pages}
         emptyMessage="No tienes reservas de salas."
         onCancel={handleCancelSala}
+        onReschedule={handleRescheduleSala}
         onPrev={() => setPageSalas((p) => p - 1)}
         onNext={() => setPageSalas((p) => p + 1)}
       />
@@ -142,6 +176,7 @@ function MisReservasPage() {
         totalPages={dataEquipos.total_pages}
         emptyMessage="No tienes reservas de equipos."
         onCancel={handleCancelEquipo}
+        onReschedule={handleRescheduleEquipo}
         onPrev={() => setPageEquipos((p) => p - 1)}
         onNext={() => setPageEquipos((p) => p + 1)}
       />
@@ -153,6 +188,7 @@ function MisReservasPage() {
         totalPages={dataCitas.total_pages}
         emptyMessage="No tienes citas."
         onCancel={handleCancelCita}
+        onReschedule={handleRescheduleCita}
         onPrev={() => setPageCitas((p) => p - 1)}
         onNext={() => setPageCitas((p) => p + 1)}
       />

@@ -54,6 +54,12 @@ function listAllReservasSalas(page = 1, pageSize = 20) {
 function listAllReservasEquipos(page = 1, pageSize = 20) {
   return apiFetch(`/resources/equipos/reservas?page=${page}&page_size=${pageSize}`);
 }
+function rescheduleReservaSala(id, payload) {
+  return apiFetch(`/resources/salas/reservas/${id}/reschedule`, { method: 'PATCH', body: JSON.stringify(payload) });
+}
+function rescheduleReservaEquipo(id, payload) {
+  return apiFetch(`/resources/equipos/reservas/${id}/reschedule`, { method: 'PATCH', body: JSON.stringify(payload) });
+}
 
 export {
   listSalas,
@@ -74,4 +80,6 @@ export {
   cancelReservaEquipo,
   listAllReservasSalas,
   listAllReservasEquipos,
+  rescheduleReservaSala,
+  rescheduleReservaEquipo,
 };

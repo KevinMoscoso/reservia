@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import AvailabilityGrid from '../components/AvailabilityGrid';
-import { createCita, getProviderAvailability, listProviders } from '../api/providers';
+import {
+  createCita,
+  getProviderAvailability,
+  listProviders,
+  rescheduleCita,
+} from '../api/providers';
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
@@ -10,6 +15,8 @@ function todayISO() {
 
 function AgendarCitaPage() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const reprogramarId = searchParams.get('reprogramar');
 
   const [provider, setProvider] = useState(null);
   const [loadingProvider, setLoadingProvider] = useState(true);
@@ -46,14 +53,21 @@ function AgendarCitaPage() {
     setError('');
     setSuccess('');
 
+    const payload = {
+      fecha,
+      hora_inicio: selectedStart,
+      num_bloques: Number(numBloques),
+      motivo,
+    };
+
     try {
-      await createCita(id, {
-        fecha,
-        hora_inicio: selectedStart,
-        num_bloques: Number(numBloques),
-        motivo,
-      });
-      setSuccess('Cita agendada exitosamente.');
+      if (reprogramarId) {
+        await rescheduleCita(reprogramarId, payload);
+        setSuccess('Cita reprogramada exitosamente.');
+      } else {
+        await createCita(id, payload);
+        setSuccess('Cita agendada exitosamente.');
+      }
       setSelectedStart(null);
       setMotivo('');
       loadAvailability();
@@ -83,6 +97,12 @@ function AgendarCitaPage() {
       <h1 className="mb-4 text-xl font-semibold text-gray-800">
         Agendar cita con {provider.full_name}
       </h1>
+
+      {reprogramarId && (
+        <div className="mb-4 rounded border border-yellow-300 bg-yellow-50 p-3 text-sm text-yellow-800">
+          Estas reprogramando una reserva existente. Al confirmar, la reserva anterior se cancelara.
+        </div>
+      )}
 
       <div className="mb-4">
         <label htmlFor="fecha" className="mb-1 block text-sm text-gray-700">
@@ -141,7 +161,7 @@ function AgendarCitaPage() {
           disabled={!selectedStart}
           className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
         >
-          Agendar cita
+          {reprogramarId ? 'Reprogramar' : 'Agendar cita'}
         </button>
       </form>
     </Layout>

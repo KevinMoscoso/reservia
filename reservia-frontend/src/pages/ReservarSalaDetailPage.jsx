@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import AvailabilityGrid from '../components/AvailabilityGrid';
-import { createReservaSala, getSalaAvailability, listSalas } from '../api/resources';
+import {
+  createReservaSala,
+  getSalaAvailability,
+  listSalas,
+  rescheduleReservaSala,
+} from '../api/resources';
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
@@ -10,6 +15,8 @@ function todayISO() {
 
 function ReservarSalaDetailPage() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const reprogramarId = searchParams.get('reprogramar');
 
   const [sala, setSala] = useState(null);
   const [loadingSala, setLoadingSala] = useState(true);
@@ -46,14 +53,21 @@ function ReservarSalaDetailPage() {
     setError('');
     setSuccess('');
 
+    const payload = {
+      fecha,
+      hora_inicio: selectedStart,
+      num_bloques: Number(numBloques),
+      motivo,
+    };
+
     try {
-      await createReservaSala(id, {
-        fecha,
-        hora_inicio: selectedStart,
-        num_bloques: Number(numBloques),
-        motivo,
-      });
-      setSuccess('Reserva creada exitosamente.');
+      if (reprogramarId) {
+        await rescheduleReservaSala(reprogramarId, payload);
+        setSuccess('Reserva reprogramada exitosamente.');
+      } else {
+        await createReservaSala(id, payload);
+        setSuccess('Reserva creada exitosamente.');
+      }
       setSelectedStart(null);
       setMotivo('');
       loadAvailability();
@@ -81,6 +95,12 @@ function ReservarSalaDetailPage() {
   return (
     <Layout>
       <h1 className="mb-4 text-xl font-semibold text-gray-800">Reservar {sala.nombre}</h1>
+
+      {reprogramarId && (
+        <div className="mb-4 rounded border border-yellow-300 bg-yellow-50 p-3 text-sm text-yellow-800">
+          Estas reprogramando una reserva existente. Al confirmar, la reserva anterior se cancelara.
+        </div>
+      )}
 
       <div className="mb-4">
         <label htmlFor="fecha" className="mb-1 block text-sm text-gray-700">
@@ -133,7 +153,7 @@ function ReservarSalaDetailPage() {
           disabled={!selectedStart}
           className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
         >
-          Reservar
+          {reprogramarId ? 'Reprogramar' : 'Reservar'}
         </button>
       </form>
     </Layout>

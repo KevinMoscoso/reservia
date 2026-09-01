@@ -50,6 +50,10 @@ class NotOwnerOrAdminError(Exception):
     pass
 
 
+class CannotRescheduleError(Exception):
+    pass
+
+
 def _parse_operating_window():
     window_start = datetime.strptime(config.RESOURCE_OPERATING_START_TIME, "%H:%M").time()
     window_end = datetime.strptime(config.RESOURCE_OPERATING_END_TIME, "%H:%M").time()
@@ -187,3 +191,30 @@ def cancel_reserva(db, reserva_id: int, actor_user: User) -> ReservaSala:
     )
 
     return reserva
+
+
+def reschedule_reserva(db, reserva_id: int, actor_user, data: BookingCreateRequest):
+    reserva = reserva_sala_repository.get_by_id(db, reserva_id)
+    if reserva is None:
+        raise ReservaNotFoundError("reserva no encontrada")
+
+    if actor_user.role.value != "admin" and reserva.user_id != actor_user.id:
+        raise NotOwnerOrAdminError("no tienes permiso sobre esta reserva")
+
+    if reserva.estado.value != "confirmada":
+        raise CannotRescheduleError("solo se pueden reprogramar reservas confirmadas")
+
+    original_user_id = reserva.user_id
+    sala_id = reserva.sala_id
+
+    reserva_sala_repository.cancel(db, reserva, cancelled_by_user_id=actor_user.id)
+
+    nueva = create_reserva(db, sala_id, original_user_id, data)
+
+    audit_repository.log_action(
+        db, actor_user_id=actor_user.id, action="reserva_sala.rescheduled",
+        entity_type="reserva_sala", entity_id=nueva.id,
+        metadata={"old_reserva_id": reserva_id},
+    )
+
+    return nueva

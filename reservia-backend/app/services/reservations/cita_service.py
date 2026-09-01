@@ -61,6 +61,10 @@ class DateBlockedError(Exception):
     pass
 
 
+class CannotRescheduleError(Exception):
+    pass
+
+
 def _blocks_overlap(start_a, end_a, start_b, end_b) -> bool:
     return start_a < end_b and start_b < end_a
 
@@ -239,3 +243,35 @@ def cancel_cita(db, cita_id: int, actor_user: User) -> Cita:
     )
 
     return cita
+
+
+def reschedule_cita(db, cita_id: int, actor_user, data: BookingCreateRequest):
+    cita = cita_repository.get_by_id(db, cita_id)
+    if cita is None:
+        raise CitaNotFoundError("cita no encontrada")
+
+    is_owner = actor_user.id == cita.user_id
+    is_provider_owner = (
+        actor_user.role.value == "provider"
+        and actor_user.id == cita.provider_profile.user_id
+    )
+    if not (is_owner or is_provider_owner):
+        raise NotOwnerOrProviderError("no tienes permiso sobre esta cita")
+
+    if cita.estado.value != "confirmada":
+        raise CannotRescheduleError("solo se pueden reprogramar citas confirmadas")
+
+    original_user_id = cita.user_id
+    provider_profile_id = cita.provider_profile_id
+
+    cita_repository.cancel(db, cita, cancelled_by_user_id=actor_user.id)
+
+    nueva = create_cita(db, provider_profile_id, original_user_id, data)
+
+    audit_repository.log_action(
+        db, actor_user_id=actor_user.id, action="cita.rescheduled",
+        entity_type="cita", entity_id=nueva.id,
+        metadata={"old_cita_id": cita_id},
+    )
+
+    return nueva
