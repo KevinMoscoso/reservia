@@ -1,0 +1,1647 @@
+﻿
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mC:/Tesis/reservia/reservia-frontend[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32mÔ£ô[39m tests/reservations/ReservarSalaDetailPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1358[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m reserva_sala_detail_creates_booking_success [33m 772[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m reserva_sala_detail_shows_overlap_error_from_api [33m 369[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/CreateProviderPage.test.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 1654[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m create_provider_shows_success_confirmation [33m 1648[2mms[22m[39m
+ [32mÔ£ô[39m tests/resources/SalasPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 2128[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m salas_page_creates_new_sala_success [33m 1110[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m salas_page_blocks_invalid_capacity_before_api_call [33m 722[2mms[22m[39m
+ [32mÔ£ô[39m tests/resources/EquiposPage.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 2180[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m equipos_page_creates_new_equipo_success [33m 1157[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m equipos_page_shows_duplicate_codigo_error_from_api [33m 878[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/LoginPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 2534[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m login_success_redirects_to_role_dashboard [33m 1007[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m login_shows_api_error_message_on_invalid_credentials [33m 738[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m login_shows_api_error_message_on_account_locked [33m 663[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/RegisterPage.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 3649[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m register_success_redirects_to_login_with_message [33m 1435[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m register_shows_duplicate_email_error_from_api [33m 1032[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m register_blocks_weak_password_before_calling_api [33m 1175[2mms[22m[39m
+ [31mÔØ»[39m tests/providers/ProviderDashboard.test.jsx [2m([22m[2m7 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 4430[2mms[22m[39m
+     [32mÔ£ô[39m provider_dashboard_loads_profile_and_schedule[32m 166[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m provider_dashboard_updates_slot_duration_success [33m 596[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m provider_dashboard_adds_schedule_block_success [33m 321[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m provider_dashboard_shows_overlap_error_from_api [33m 314[2mms[22m[39m
+     [32mÔ£ô[39m provider_dashboard_deactivates_schedule_block_success[32m 200[2mms[22m[39m
+[31m     [31m├ù[31m provider_dashboard_adds_date_block_success[39m[33m 1507[2mms[22m[39m
+[31m     [31m├ù[31m provider_dashboard_shows_conflict_error_when_blocking_date_with_citas[39m[33m 1320[2mms[22m[39m
+ [32mÔ£ô[39m tests/reservations/AgendarCitaPage.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1019[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m agendar_cita_creates_booking_success [33m 794[2mms[22m[39m
+ [32mÔ£ô[39m tests/reservations/Reschedule.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1310[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m reschedule_banner_shown_when_reprogramar_param_present [33m 493[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m reschedule_calls_reschedule_endpoint_not_create_endpoint [33m 627[2mms[22m[39m
+ [32mÔ£ô[39m tests/reservations/AdminReservasPage.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 913[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m admin_reservas_cancels_reserva_sala_success [33m 576[2mms[22m[39m
+node.exe : Not implemented: navigation to another Document
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\sebas\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Not implemented...nother Document:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ [32mÔ£ô[39m tests/reservations/MisReservasPage.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 1012[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m mis_reservas_cancels_reserva_sala_success [33m 545[2mms[22m[39m
+ [32mÔ£ô[39m tests/reports/OccupancyReportPage.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[33m 691[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m occupancy_report_export_button_calls_correct_endpoint [33m 505[2mms[22m[39m
+ [32mÔ£ô[39m tests/notifications/NotificationBell.test.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 762[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m notification_bell_lists_notifications_on_open [33m 411[2mms[22m[39m
+ [32mÔ£ô[39m tests/audit/AuditLogPage.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[33m 617[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m audit_log_pagination_next_button_fetches_next_page [33m 425[2mms[22m[39m
+ [32mÔ£ô[39m tests/reports/SystemActivityReportPage.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 148[2mms[22m[39m
+ [32mÔ£ô[39m tests/reports/ProviderActivityReportPage.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 141[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/Logout.test.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 414[2mms[22m[39m
+     [33m[2mÔ£ô[22m[39m logout_calls_api_and_redirects_to_login [33m 410[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/ProtectedRoute.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 100[2mms[22m[39m
+ [32mÔ£ô[39m tests/auth/AuthContext.test.jsx [2m([22m[2m1 test[22m[2m)[22m[32m 85[2mms[22m[39m
+
+[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m[1m[41m Failed Tests 2 [49m[22m[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/providers/ProviderDashboard.test.jsx[2m > [22mProviderDashboardPage[2m > 
+[22mprovider_dashboard_adds_date_block_success
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: 2026-09-01. This could be because the text is 
+broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-50"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-center justify-between bg-white px-6 py-4 shadow-sm"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"text-lg font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mReservia[0m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-4"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"text-sm text-gray-600"[39m
+          [36m>[39m
+            [0mProveedor Uno[0m
+            [0m ([0m
+            [0mprovider[0m
+            [0m)[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Notificaciones"[39m
+              [33mclass[39m=[32m"relative rounded px-2 py-1 text-lg"[39m
+            [36m>[39m
+              [0m­ƒöö[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"rounded bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"[39m
+          [36m>[39m
+            [0mCerrar sesi├│n[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33mclass[39m=[32m"flex gap-4 border-b border-gray-200 bg-white px-6 py-2 text-sm"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/salas"[39m
+        [36m>[39m
+          [0mSalas[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/equipos"[39m
+        [36m>[39m
+          [0mEquipos[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/proveedores"[39m
+        [36m>[39m
+          [0mProveedores[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/mis-reservas"[39m
+        [36m>[39m
+          [0mMis reservas[0m
+        [36m</a>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"p-6"[39m
+      [36m>[39m
+        [36m<h1[39m
+          [33mclass[39m=[32m"mb-4 text-xl font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mBienvenido, [0m
+          [0mProveedor Uno[0m
+        [36m</h1>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8 max-w-sm"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mPerfil[0m
+          [36m</h2>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"slot_duration_minutes"[39m
+              [36m>[39m
+                [0mDuraci├│n del slot (minutos)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"w-full rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"slot_duration_minutes"[39m
+                [33mtype[39m=[32m"number"[39m
+                [33mvalue[39m=[32m"30"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mGuardar[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mHorario semanal[0m
+          [36m</h2>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mLunes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMartes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMiercoles[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mJueves[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mViernes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mSabado[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mDomingo[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [0mD├¡a[0m
+              [36m</label>[39m
+              [36m<select[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"monday"[39m
+                [36m>[39m
+                  [0mLunes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"tuesday"[39m
+                [36m>[39m
+                  [0mMartes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"wednesday"[39m
+                [36m>[39m
+                  [0mMiercoles[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"thursday"[39m
+                [36m>[39m
+                  [0mJueves[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"friday"[39m
+                [36m>[39m
+                  [0mViernes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"saturday"[39m
+                [36m>[39m
+                  [0mSabado[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"sunday"[39m
+                [36m>[39m
+                  [0mDomingo[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"start_time"[39m
+              [36m>[39m
+                [0mHora inicio[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"start_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"end_time"[39m
+              [36m>[39m
+                [0mHora fin[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"end_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mAgregar bloque[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mFechas bloqueadas[0m
+          [36m</h2>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm text-gray-400"[39m
+          [36m>[39m
+            [0mNo tienes fechas bloqueadas.[0m
+          [36m</p>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"flex flex-col gap-2"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"fecha_bloqueo"[39m
+              [36m>[39m
+                [0mFecha[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"fecha_bloqueo"[39m
+                [33mmin[39m=[32m"2026-09-04"[39m
+                [33mtype[39m=[32m"date"[39m
+                [33mvalue[39m=[32m"2026-09-01"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"motivo_bloqueo"[39m
+              [36m>[39m
+                [0mMotivo (opcional)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"motivo_bloqueo"[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m"Vacaciones"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mBloquear fecha[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mt-8"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-blue-600 hover:underline"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/reportes/proveedores"[39m
+          [36m>[39m
+            [0mVer mi actividad[0m
+          [36m</a>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-50"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-center justify-between bg-white px-6 py-4 shadow-sm"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"text-lg font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mReservia[0m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-4"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"text-sm text-gray-600"[39m
+          [36m>[39m
+            [0mProveedor Uno[0m
+            [0m ([0m
+            [0mprovider[0m
+            [0m)[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Notificaciones"[39m
+              [33mclass[39m=[32m"relative rounded px-2 py-1 text-lg"[39m
+            [36m>[39m
+              [0m­ƒöö[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"rounded bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"[39m
+          [36m>[39m
+            [0mCerrar sesi├│n[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33mclass[39m=[32m"flex gap-4 border-b border-gray-200 bg-white px-6 py-2 text-sm"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/salas"[39m
+        [36m>[39m
+          [0mSalas[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/equipos"[39m
+        [36m>[39m
+          [0mEquipos[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/proveedores"[39m
+        [36m>[39m
+          [0mProveedores[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/mis-reservas"[39m
+        [36m>[39m
+          [0mMis reservas[0m
+        [36m</a>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"p-6"[39m
+      [36m>[39m
+        [36m<h1[39m
+          [33mclass[39m=[32m"mb-4 text-xl font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mBienvenido, [0m
+          [0mProveedor Uno[0m
+        [36m</h1>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8 max-w-sm"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mPerfil[0m
+          [36m</h2>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"slot_duration_minutes"[39m
+              [36m>[39m
+                [0mDuraci├│n del slot (minutos)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"w-full rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"slot_duration_minutes"[39m
+                [33mtype[39m=[32m"number"[39m
+                [33mvalue[39m=[32m"30"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mGuardar[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mHorario semanal[0m
+          [36m</h2>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mLunes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMartes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMiercoles[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mJueves[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mViernes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mSabado[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mDomingo[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [0mD├¡a[0m
+              [36m</label>[39m
+              [36m<select[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"monday"[39m
+                [36m>[39m
+                  [0mLunes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"tuesday"[39m
+                [36m>[39m
+                  [0mMartes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"wednesday"[39m
+                [36m>[39m
+                  [0mMiercoles[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"thursday"[39m
+                [36m>[39m
+                  [0mJueves[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"friday"[39m
+                [36m>[39m
+                  [0mViernes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"saturday"[39m
+                [36m>[39m
+                  [0mSabado[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"sunday"[39m
+                [36m>[39m
+                  [0mDomingo[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"start_time"[39m
+              [36m>[39m
+                [0mHora inicio[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"start_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"end_time"[39m
+              [36m>[39m
+                [0mHora fin[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"end_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mAgregar bloque[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mFechas bloqueadas[0m
+          [36m</h2>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm text-gray-400"[39m
+          [36m>[39m
+            [0mNo tienes fechas bloqueadas.[0m
+          [36m</p>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"flex flex-col gap-2"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"fecha_bloqueo"[39m
+              [36m>[39m
+                [0mFecha[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"fecha_bloqueo"[39m
+                [33mmin[39m=[32m"2026-09-04"[39m
+                [33mtype[39m=[32m"date"[39m
+                [33mvalue[39m=[32m"2026-09-01"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"motivo_bloqueo"[39m
+              [36m>[39m
+                [0mMotivo (opcional)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"motivo_bloqueo"[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m"Vacaciones"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mBloquear fecha[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mt-8"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-blue-600 hover:underline"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/reportes/proveedores"[39m
+          [36m>[39m
+            [0mVer mi actividad[0m
+          [36m</a>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2mÔØ»[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2mÔØ»[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2mÔØ»[22m tests/providers/ProviderDashboard.test.jsx:[2m323:25[22m[39m
+    [90m321|[39m     await user.click(screen.getByRole('button', { name: /bloquear fechÔÇª
+    [90m322|[39m
+    [90m323|[39m     [34mexpect[39m([35mawait[39m 
+screen[33m.[39m[34mfindByText[39m([32m'2026-09-01'[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m   |[39m                         [31m^[39m
+    [90m324|[39m     
+[34mexpect[39m(screen[33m.[39m[34mgetByText[39m([32m'Vacaciones'[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+    [90m325|[39m   })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/2]ÔÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/providers/ProviderDashboard.test.jsx[2m > [22mProviderDashboardPage[2m > 
+[22mprovider_dashboard_shows_conflict_error_when_blocking_date_with_citas
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: ya tienes citas confirmadas en esa fecha; 
+cancelalas antes de bloquearla. This could be because the text is broken up by multiple elements. In this case, you can provide a function 
+for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-50"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-center justify-between bg-white px-6 py-4 shadow-sm"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"text-lg font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mReservia[0m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-4"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"text-sm text-gray-600"[39m
+          [36m>[39m
+            [0mProveedor Uno[0m
+            [0m ([0m
+            [0mprovider[0m
+            [0m)[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Notificaciones"[39m
+              [33mclass[39m=[32m"relative rounded px-2 py-1 text-lg"[39m
+            [36m>[39m
+              [0m­ƒöö[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"rounded bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"[39m
+          [36m>[39m
+            [0mCerrar sesi├│n[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33mclass[39m=[32m"flex gap-4 border-b border-gray-200 bg-white px-6 py-2 text-sm"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/salas"[39m
+        [36m>[39m
+          [0mSalas[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/equipos"[39m
+        [36m>[39m
+          [0mEquipos[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/proveedores"[39m
+        [36m>[39m
+          [0mProveedores[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/mis-reservas"[39m
+        [36m>[39m
+          [0mMis reservas[0m
+        [36m</a>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"p-6"[39m
+      [36m>[39m
+        [36m<h1[39m
+          [33mclass[39m=[32m"mb-4 text-xl font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mBienvenido, [0m
+          [0mProveedor Uno[0m
+        [36m</h1>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8 max-w-sm"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mPerfil[0m
+          [36m</h2>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"slot_duration_minutes"[39m
+              [36m>[39m
+                [0mDuraci├│n del slot (minutos)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"w-full rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"slot_duration_minutes"[39m
+                [33mtype[39m=[32m"number"[39m
+                [33mvalue[39m=[32m"30"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mGuardar[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mHorario semanal[0m
+          [36m</h2>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mLunes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMartes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMiercoles[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mJueves[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mViernes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mSabado[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mDomingo[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [0mD├¡a[0m
+              [36m</label>[39m
+              [36m<select[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"monday"[39m
+                [36m>[39m
+                  [0mLunes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"tuesday"[39m
+                [36m>[39m
+                  [0mMartes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"wednesday"[39m
+                [36m>[39m
+                  [0mMiercoles[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"thursday"[39m
+                [36m>[39m
+                  [0mJueves[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"friday"[39m
+                [36m>[39m
+                  [0mViernes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"saturday"[39m
+                [36m>[39m
+                  [0mSabado[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"sunday"[39m
+                [36m>[39m
+                  [0mDomingo[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"start_time"[39m
+              [36m>[39m
+                [0mHora inicio[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"start_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"end_time"[39m
+              [36m>[39m
+                [0mHora fin[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"end_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mAgregar bloque[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mFechas bloqueadas[0m
+          [36m</h2>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm text-gray-400"[39m
+          [36m>[39m
+            [0mNo tienes fechas bloqueadas.[0m
+          [36m</p>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"flex flex-col gap-2"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"fecha_bloqueo"[39m
+              [36m>[39m
+                [0mFecha[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"fecha_bloqueo"[39m
+                [33mmin[39m=[32m"2026-09-04"[39m
+                [33mtype[39m=[32m"date"[39m
+                [33mvalue[39m=[32m"2026-09-02"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"motivo_bloqueo"[39m
+              [36m>[39m
+                [0mMotivo (opcional)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"motivo_bloqueo"[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mBloquear fecha[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mt-8"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-blue-600 hover:underline"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/reportes/proveedores"[39m
+          [36m>[39m
+            [0mVer mi actividad[0m
+          [36m</a>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-gray-50"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-center justify-between bg-white px-6 py-4 shadow-sm"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"text-lg font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mReservia[0m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-4"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"text-sm text-gray-600"[39m
+          [36m>[39m
+            [0mProveedor Uno[0m
+            [0m ([0m
+            [0mprovider[0m
+            [0m)[0m
+          [36m</span>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33maria-label[39m=[32m"Notificaciones"[39m
+              [33mclass[39m=[32m"relative rounded px-2 py-1 text-lg"[39m
+            [36m>[39m
+              [0m­ƒöö[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"rounded bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"[39m
+          [36m>[39m
+            [0mCerrar sesi├│n[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33mclass[39m=[32m"flex gap-4 border-b border-gray-200 bg-white px-6 py-2 text-sm"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/salas"[39m
+        [36m>[39m
+          [0mSalas[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/recursos/equipos"[39m
+        [36m>[39m
+          [0mEquipos[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/proveedores"[39m
+        [36m>[39m
+          [0mProveedores[0m
+        [36m</a>[39m
+        [36m<a[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/mis-reservas"[39m
+        [36m>[39m
+          [0mMis reservas[0m
+        [36m</a>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"p-6"[39m
+      [36m>[39m
+        [36m<h1[39m
+          [33mclass[39m=[32m"mb-4 text-xl font-semibold text-gray-800"[39m
+        [36m>[39m
+          [0mBienvenido, [0m
+          [0mProveedor Uno[0m
+        [36m</h1>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8 max-w-sm"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mPerfil[0m
+          [36m</h2>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"slot_duration_minutes"[39m
+              [36m>[39m
+                [0mDuraci├│n del slot (minutos)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"w-full rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"slot_duration_minutes"[39m
+                [33mtype[39m=[32m"number"[39m
+                [33mvalue[39m=[32m"30"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mGuardar[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mHorario semanal[0m
+          [36m</h2>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mLunes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMartes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mMiercoles[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mJueves[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mViernes[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mSabado[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-4"[39m
+          [36m>[39m
+            [36m<h3[39m
+              [33mclass[39m=[32m"font-medium text-gray-700"[39m
+            [36m>[39m
+              [0mDomingo[0m
+            [36m</h3>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-sm text-gray-400"[39m
+            [36m>[39m
+              [0mSin bloques configurados.[0m
+            [36m</p>[39m
+            [36m<ul />[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [0mD├¡a[0m
+              [36m</label>[39m
+              [36m<select[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"day_of_week"[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"monday"[39m
+                [36m>[39m
+                  [0mLunes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"tuesday"[39m
+                [36m>[39m
+                  [0mMartes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"wednesday"[39m
+                [36m>[39m
+                  [0mMiercoles[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"thursday"[39m
+                [36m>[39m
+                  [0mJueves[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"friday"[39m
+                [36m>[39m
+                  [0mViernes[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"saturday"[39m
+                [36m>[39m
+                  [0mSabado[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"sunday"[39m
+                [36m>[39m
+                  [0mDomingo[0m
+                [36m</option>[39m
+              [36m</select>[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m18 passed[39m[22m[90m (19)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m51 passed[39m[22m[90m (53)[39m
+[2m   Start at [22m 18:36:58
+[2m   Duration [22m 17.60s[2m (transform 1.85s, setup 14.57s, import 8.67s, tests 25.15s, environment 55.32s)[22m
+
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"start_time"[39m
+              [36m>[39m
+                [0mHora inicio[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"start_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"end_time"[39m
+              [36m>[39m
+                [0mHora fin[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"end_time"[39m
+                [33mrequired[39m=[32m""[39m
+                [33mtype[39m=[32m"time"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mAgregar bloque[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mb-8"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mclass[39m=[32m"mb-2 text-lg font-semibold text-gray-800"[39m
+          [36m>[39m
+            [0mFechas bloqueadas[0m
+          [36m</h2>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm text-gray-400"[39m
+          [36m>[39m
+            [0mNo tienes fechas bloqueadas.[0m
+          [36m</p>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"flex flex-col gap-2"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"mt-4 flex flex-wrap items-end gap-3"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"fecha_bloqueo"[39m
+              [36m>[39m
+                [0mFecha[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"fecha_bloqueo"[39m
+                [33mmin[39m=[32m"2026-09-04"[39m
+                [33mtype[39m=[32m"date"[39m
+                [33mvalue[39m=[32m"2026-09-02"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"mb-1 block text-sm text-gray-700"[39m
+                [33mfor[39m=[32m"motivo_bloqueo"[39m
+              [36m>[39m
+                [0mMotivo (opcional)[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"rounded border border-gray-300 px-3 py-2"[39m
+                [33mid[39m=[32m"motivo_bloqueo"[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mBloquear fecha[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"mt-8"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-blue-600 hover:underline"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/reportes/proveedores"[39m
+          [36m>[39m
+            [0mVer mi actividad[0m
+          [36m</a>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2mÔØ»[22m waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[90m [2mÔØ»[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m86:33[22m[39m
+[36m [2mÔØ»[22m tests/providers/ProviderDashboard.test.jsx:[2m368:20[22m[39m
+    [90m366|[39m
+    [90m367|[39m     [34mexpect[39m(
+    [90m368|[39m       [35mawait[39m screen[33m.[39m[34mfindByText[39m(
+    [90m   |[39m                    [31m^[39m
+    [90m369|[39m         'ya tienes citas confirmadas en esa fecha; cancelalas antes deÔÇª
+    [90m370|[39m       )
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[2/2]ÔÄ»[22m[39m
+

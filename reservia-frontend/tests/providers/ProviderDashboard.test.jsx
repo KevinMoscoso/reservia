@@ -41,6 +41,12 @@ function renderProviderDashboard() {
   );
 }
 
+function futureDateISO(daysAhead) {
+  const d = new Date();
+  d.setDate(d.getDate() + daysAhead);
+  return d.toISOString().slice(0, 10);
+}
+
 const UNREAD_COUNT_MOCK = {
   'GET /api/notifications/me/unread-count': () => ({
     ok: true,
@@ -276,6 +282,8 @@ describe('ProviderDashboardPage', () => {
   });
 
   it('provider_dashboard_adds_date_block_success', async () => {
+    const fecha = futureDateISO(5);
+
     mockFetchRoutes({
       'GET /api/auth/me': () => ({
         ok: true,
@@ -304,7 +312,7 @@ describe('ProviderDashboardPage', () => {
         json: async () => ({
           id: 1,
           provider_profile_id: 10,
-          fecha: '2026-09-01',
+          fecha,
           motivo: 'Vacaciones',
           estado: 'active',
         }),
@@ -316,11 +324,11 @@ describe('ProviderDashboardPage', () => {
 
     await screen.findByRole('button', { name: /bloquear fecha/i });
 
-    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: '2026-09-01' } });
+    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: fecha } });
     await user.type(screen.getByLabelText(/motivo \(opcional\)/i), 'Vacaciones');
     await user.click(screen.getByRole('button', { name: /bloquear fecha/i }));
 
-    expect(await screen.findByText('2026-09-01')).toBeInTheDocument();
+    expect(await screen.findByText(fecha)).toBeInTheDocument();
     expect(screen.getByText('Vacaciones')).toBeInTheDocument();
   });
 
@@ -361,7 +369,7 @@ describe('ProviderDashboardPage', () => {
 
     await screen.findByRole('button', { name: /bloquear fecha/i });
 
-    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: '2026-09-02' } });
+    fireEvent.change(screen.getByLabelText(/^fecha$/i), { target: { value: futureDateISO(6) } });
     await user.click(screen.getByRole('button', { name: /bloquear fecha/i }));
 
     expect(
